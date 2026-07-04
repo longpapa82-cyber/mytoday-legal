@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>myToday — 마음 습관 다이어리</title>
+<meta name="description" content="매일의 기분을 기록하고 오늘 하고 싶은 일을 새싹처럼 키우는 마음 습관 다이어리. 기분 체크·할 일·성장 정원·친구 응원을 한 곳에서." />
+<meta property="og:title" content="myToday — 마음 습관 다이어리" />
+<meta property="og:description" content="오늘의 기분과 할 일을 한 곳에서. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나요." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --leaf-deep: #334e04;
+    --primary: #4a671d;
+    --primary-container: #d1f59a;
+    --sprout-light: #cbef94;
+    --on-surface: #191c1a;
+    --on-surface-variant: #44483b;
+    --surface: #f8faf6;
+    --surface-card: #ffffff;
+    --outline: #c4c8b7;
+    --sun-glow: #fef3c7;
+    --secondary-container: #b8e9c8;
+    --radius: 1.5rem;
+    --radius-lg: 2.5rem;
+    --space-section: clamp(3rem, 2rem + 5vw, 6rem);
+    --shadow-clay:
+      0 10px 30px -8px rgba(74, 103, 29, 0.18),
+      inset 2px 2px 6px rgba(255, 255, 255, 0.9),
+      inset -2px -2px 8px rgba(0, 0, 0, 0.03);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, var(--sprout-light) 0%, transparent 55%),
+      linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    color: var(--on-surface);
+    font-family: 'Noto Sans KR', 'Quicksand', system-ui, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Header ── */
+  header.brand {
+    display: flex; align-items: center; gap: 12px;
+    padding: 28px 24px; max-width: 960px; margin: 0 auto;
+  }
+  header.brand .dot {
+    width: 44px; height: 44px; border-radius: 9999px;
+    background: var(--surface-card);
+    display: grid; place-items: center; font-size: 24px;
+    box-shadow: var(--shadow-clay);
+  }
+  header.brand h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.4rem; font-weight: 700; color: var(--primary); margin: 0;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: clamp(2rem, 1rem + 4vw, 4rem) 24px var(--space-section);
+    max-width: 760px; margin: 0 auto;
+  }
+  .hero .mascot {
+    width: clamp(120px, 30vw, 180px); height: clamp(120px, 30vw, 180px);
+    margin: 0 auto 1.5rem; border-radius: 9999px;
+    background: var(--surface-card);
+    display: grid; place-items: center;
+    box-shadow: var(--shadow-clay);
+    font-size: clamp(56px, 14vw, 88px);
+  }
+  .hero h2 {
+    font-size: clamp(2rem, 1rem + 6vw, 3.4rem);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.2;
+    margin: 0 0 1rem; color: var(--leaf-deep);
+  }
+  .hero p.lead {
+    font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.3rem);
+    color: var(--on-surface-variant); margin: 0 auto 2.2rem; max-width: 34ch;
+  }
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.95rem 1.9rem; border-radius: 9999px;
+    font-weight: 700; font-size: 1rem; text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+  }
+  .btn-primary {
+    background: var(--primary); color: #fff;
+    box-shadow: 0 8px 20px -6px rgba(74, 103, 29, 0.5);
+  }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.02); }
+  .btn-ghost {
+    background: var(--surface-card); color: var(--primary);
+    border: 2px solid var(--primary-container);
+  }
+  .btn-ghost:hover { transform: translateY(-3px); }
+
+  /* ── Features (bento) ── */
+  .features { padding-bottom: var(--space-section); }
+  .features h3 {
+    text-align: center; font-size: clamp(1.5rem, 1rem + 2vw, 2.1rem);
+    font-weight: 700; color: var(--leaf-deep); margin: 0 0 2.5rem;
+  }
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .card {
+    background: var(--surface-card);
+    border: 1px solid var(--outline);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    box-shadow: var(--shadow-clay);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover { transform: translateY(-6px); }
+  .card .emoji {
+    width: 56px; height: 56px; border-radius: 1rem;
+    background: var(--secondary-container);
+    display: grid; place-items: center; font-size: 28px; margin-bottom: 1rem;
+  }
+  .card.sun .emoji { background: var(--sun-glow); }
+  .card.leaf .emoji { background: var(--primary-container); }
+  .card h4 { margin: 0 0 0.5rem; font-size: 1.2rem; color: var(--on-surface); font-weight: 700; }
+  .card p { margin: 0; color: var(--on-surface-variant); font-size: 0.98rem; }
+
+  /* ── Closing ── */
+  .closing {
+    text-align: center; padding: var(--space-section) 24px;
+    max-width: 640px; margin: 0 auto;
+  }
+  .closing h3 { font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem); color: var(--leaf-deep); margin: 0 0 0.8rem; font-weight: 700; }
+  .closing p { color: var(--on-surface-variant); margin: 0 0 2rem; }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--outline);
+    padding: 2.5rem 24px 3rem;
+    text-align: center; color: var(--on-surface-variant); font-size: 0.9rem;
+  }
+  footer .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .biz { font-size: 0.8rem; opacity: 0.8; line-height: 1.6; }
+
+  .disclaimer {
+    max-width: 640px; margin: 0 auto; padding: 0 24px;
+    text-align: center; font-size: 0.82rem; color: var(--on-surface-variant); opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+  <header class="brand">
+    <span class="dot">🌱</span>
+    <h1>myToday</h1>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="mascot" aria-hidden="true">🌱</div>
+      <h2 id="hero-heading">오늘의 기분과 할 일을<br />한 곳에서</h2>
+      <p class="lead">매일의 기분을 기록하고 하고 싶은 일을 새싹처럼 키워보세요. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나는 마음 습관 다이어리.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#features">기능 살펴보기</a>
+        <a class="btn btn-ghost" href="./privacy.html">개인정보처리방침</a>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features wrap" id="features" aria-labelledby="features-heading">
+      <h3 id="features-heading">myToday와 함께하는 하루</h3>
+      <div class="grid">
+        <article class="card sun">
+          <div class="emoji" aria-hidden="true">☀️</div>
+          <h4>오늘의 기분 체크</h4>
+          <p>5단계 기분으로 하루의 감정을 간단히 기록하고, 주간·기간별 기분 추이를 한눈에 확인해요.</p>
+        </article>
+        <article class="card leaf">
+          <div class="emoji" aria-hidden="true">✅</div>
+          <h4>오늘의 할 일</h4>
+          <p>하고 싶은 일과 목표를 등록하고 완료를 체크하면, 나의 새싹이 한 뼘씩 자라나요.</p>
+        </article>
+        <article class="card">
+          <div class="emoji" aria-hidden="true">🌿</div>
+          <h4>성장하는 정원</h4>
+          <p>매일의 기록이 스트릭과 레벨로 이어지고, 꾸준함이 눈에 보이는 성장으로 바뀌어요.</p>
+        </article>
+        <article class="card leaf">
+          <div class="emoji" aria-hidden="true">💚</div>
+          <h4>친구와 함께</h4>
+          <p>지인과 달성 내역을 공유하며 서로를 응원하고, 함께 성장하는 즐거움을 나눠요.</p>
+        </article>
+        <article class="card sun">
+          <div class="emoji" aria-hidden="true">🔔</div>
+          <h4>독려 알림</h4>
+          <p>매일 아침 기분 체크 알림과 따뜻한 응원 메시지로 활기찬 하루를 시작해요.</p>
+        </article>
+        <article class="card">
+          <div class="emoji" aria-hidden="true">📊</div>
+          <h4>깊이 있는 통계</h4>
+          <p>프리미엄 구독으로 광고 없이 기분·달성 추이를 더 자세히 살펴볼 수 있어요.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing" aria-labelledby="closing-heading">
+      <h3 id="closing-heading">오늘도 새싹처럼 🌱</h3>
+      <p>작은 습관이 모여 한 뼘씩 자라나는 나. myToday와 함께 성장해요.</p>
+      <a class="btn btn-primary" href="#">App Store에서 곧 만나요</a>
+    </section>
+
+    <p class="disclaimer">
+      myToday의 기분 기록은 자기관리를 위한 것으로, 의학적 진단·치료를 대체하지 않습니다.
+      정신적·신체적 건강에 대한 우려가 있는 경우 전문가와 상담하시기 바랍니다.
+    </p>
+  </main>
+
+  <footer>
+    <div class="links">
+      <a href="./privacy.html">개인정보처리방침</a>
+      <a href="./terms.html">이용약관</a>
+      <a href="./delete-account.html">계정 삭제 안내</a>
+      <a href="mailto:longpapa82@gmail.com">문의하기</a>
+    </div>
+    <p class="biz">
+      myToday (Joyful Day) · 에이아이소프트 · 대표 박훈재<br />
+      문의: <a href="mailto:longpapa82@gmail.com">longpapa82@gmail.com</a><br />
+      © 2026 에이아이소프트. All rights reserved.
+    </p>
+  </footer>
+</body>
+</html>
