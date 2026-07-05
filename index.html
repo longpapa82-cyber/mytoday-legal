@@ -90,12 +90,17 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(202,245,154,0.16) 100%);
     border-radius: var(--radius-xl);
     margin: 0 12px;
+    /* 밴드 내부 좌우 패딩 — 안의 .wrap(0 24px)만으론 밴드 벽에 붙어 답답. 밴드가
+       한 겹 더 안쪽으로 콘텐츠를 밀어 여백을 확보한다. */
+    padding: 0 clamp(8px, 2vw, 24px);
     box-shadow: 0 20px 50px -30px rgba(55,129,28,0.25);
   }
   .band.warm {
     background: linear-gradient(180deg, rgba(255,243,214,0.55) 0%, rgba(255,225,191,0.20) 100%);
   }
-  @media (max-width: 640px) { .band { margin: 0 4px; border-radius: var(--radius-lg); } }
+  /* 모바일: 밴드가 화면 끝까지 넓어져도 내부 패딩으로 콘텐츠가 벽에 안 붙게.
+     밴드 안 .wrap(0 24px 아님 — .sec.wrap 은 wrap 24px)만으론 부족해 밴드에 추가 여백. */
+  @media (max-width: 640px) { .band { margin: 0 2px; border-radius: var(--radius-lg); padding: 0 10px; } }
 
   /* ── 떠다니는 떡잎 낙엽 배경 (SproutBackdrop 재현). ★position:absolute + 페이지
      전체 높이 → 스크롤 시 콘텐츠와 함께 흘러 자연스럽다(fixed면 화면에 멈춰 오류처럼 보임). ── */
@@ -291,7 +296,9 @@
   .closing p { color: var(--on-surface-variant); margin: 0 0 2rem; }
 
   /* ── 공통 섹션 제목 ── */
-  .sec { padding: var(--space-section) 0; }
+  /* ⚠️ 좌우 패딩을 건드리지 않는다(padding 단축속성은 .wrap의 좌우 24px를 덮어써
+     텍스트가 벽에 붙는다). 세로 여백만 지정. */
+  .sec { padding-top: var(--space-section); padding-bottom: var(--space-section); }
   .sec > h3 { text-align: center; font-size: clamp(1.7rem, 1rem + 2.6vw, 2.5rem); color: var(--leaf-deep); margin: 0 0 0.6rem; letter-spacing: -0.01em; }
   .sec > .sub { text-align: center; color: var(--on-surface-variant); margin: 0 auto 2.8rem; max-width: 42ch; }
   /* eyebrow: 섹션 제목 위 작은 라벨(편집적 위계) */
