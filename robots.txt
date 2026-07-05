@@ -1,0 +1,13 @@
+# myToday 홍보 사이트 robots.txt
+# 모든 크롤러에 전체 공개(색인 허용). 검색 노출이 목적이라 차단 없음.
+User-agent: *
+Allow: /
+
+# 네이버·구글 크롤러 명시 허용(관례상 표기).
+User-agent: Yeti
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://longpapa82-cyber.github.io/mytoday-legal/sitemap.xml

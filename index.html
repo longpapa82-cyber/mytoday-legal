@@ -3,13 +3,26 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>myToday — 마음 습관 다이어리</title>
-<meta name="description" content="매일의 기분을 기록하고 오늘 하고 싶은 일을 새싹처럼 키우는 마음 습관 다이어리. 기분 체크·할 일·성장 정원·친구 공유를 한 곳에서." />
-<meta property="og:title" content="myToday — 마음 습관 다이어리" />
+<title>myToday — 기분 기록·할 일 관리 마음 습관 다이어리 앱</title>
+<meta name="description" content="myToday는 매일의 기분을 기록하고 오늘 하고 싶은 일을 새싹처럼 키우는 무료 마음 습관 다이어리 앱이에요. 5단계 기분 체크·할 일 달성·성장 정원·친구 공유를 한 곳에서." />
+<meta name="keywords" content="myToday, 마음 습관 다이어리, 기분 기록 앱, 기분 다이어리, 할 일 관리, 습관 앱, 감정 기록, 무드 트래커, 목표 달성" />
+<meta name="author" content="에이아이소프트" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://longpapa82-cyber.github.io/mytoday-legal/" />
+<!-- Open Graph -->
+<meta property="og:title" content="myToday — 마음 습관 다이어리 앱" />
 <meta property="og:description" content="오늘의 기분과 할 일을 한 곳에서. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나요." />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ko_KR" />
+<meta property="og:site_name" content="myToday" />
+<meta property="og:url" content="https://longpapa82-cyber.github.io/mytoday-legal/" />
 <meta property="og:image" content="https://longpapa82-cyber.github.io/mytoday-legal/assets/banner.png" />
+<meta property="og:image:alt" content="myToday 새싹 마스코트와 브랜드" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="myToday — 마음 습관 다이어리 앱" />
+<meta name="twitter:description" content="오늘의 기분과 할 일을 한 곳에서. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나요." />
+<meta name="twitter:image" content="https://longpapa82-cyber.github.io/mytoday-legal/assets/banner.png" />
 <link rel="icon" type="image/png" href="./assets/favicon.png" />
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -192,15 +205,16 @@
     .hero .mascot svg { animation: none; }
     .mascot .eyes { animation: none; }
   }
-  .hero h2 {
+  .hero h1 {
+    font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400;
     font-size: clamp(2rem, 1rem + 6vw, 3.2rem); line-height: 1.25;
     letter-spacing: -0.02em; margin: 0 0 1rem; color: var(--leaf-deep);
   }
   /* 강조 단어: 새싹 그린 + 아래 물결 밑줄(의미적 색). */
-  .hero h2 em {
+  .hero h1 em {
     font-style: normal; color: var(--primary); position: relative; white-space: nowrap;
   }
-  .hero h2 em::after {
+  .hero h1 em::after {
     content: ''; position: absolute; left: 0; right: 0; bottom: -0.08em; height: 0.28em;
     background: var(--sun); border-radius: 9999px; z-index: -1; opacity: 0.55;
   }
@@ -423,6 +437,62 @@
     html.js-reveal .reveal { opacity: 1 !important; transform: none !important; }
   }
 </style>
+<!-- 구조화 데이터(JSON-LD): 검색엔진이 앱·조직·FAQ를 리치 결과로 인식.
+     ★페이지에 실제 존재하는 사실만 마크업(가짜 평점·미구현 기능 금지). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://longpapa82-cyber.github.io/mytoday-legal/#website",
+      "url": "https://longpapa82-cyber.github.io/mytoday-legal/",
+      "name": "myToday",
+      "description": "매일의 기분을 기록하고 하고 싶은 일을 새싹처럼 키우는 마음 습관 다이어리 앱",
+      "inLanguage": "ko-KR",
+      "publisher": { "@id": "https://longpapa82-cyber.github.io/mytoday-legal/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://longpapa82-cyber.github.io/mytoday-legal/#org",
+      "name": "에이아이소프트",
+      "url": "https://aisoft-iota.vercel.app/",
+      "email": "longpapa82@gmail.com",
+      "logo": "https://longpapa82-cyber.github.io/mytoday-legal/assets/apple-touch-icon.png"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "myToday",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "LifestyleApplication",
+      "description": "매일의 기분을 5단계로 기록하고, 하고 싶은 일을 등록·달성하며 새싹처럼 성장하는 마음 습관 다이어리. 기분 추이, 할 일 달성 통계, 성장 정원, 친구 공유를 제공합니다.",
+      "inLanguage": "ko-KR",
+      "url": "https://longpapa82-cyber.github.io/mytoday-legal/",
+      "image": "https://longpapa82-cyber.github.io/mytoday-legal/assets/banner.png",
+      "author": { "@id": "https://longpapa82-cyber.github.io/mytoday-legal/#org" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW",
+        "description": "무료 다운로드. 광고 제거 프리미엄 구독(월 3,300원 / 연 29,000원, 스토어 기준)."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "어떻게 가입하나요?", "acceptedAnswer": { "@type": "Answer", "text": "이메일로 가입하거나(6자리 인증 코드 확인) 구글·카카오·애플 계정으로 간편하게 시작할 수 있어요. 애플 로그인은 iPhone에서 제공돼요." } },
+        { "@type": "Question", "name": "기분은 어떻게 기록하나요?", "acceptedAnswer": { "@type": "Answer", "text": "하루에 한 번, 우울·지침·평온·행복·신남 5단계 중에서 지금의 기분을 골라요. 짧은 한마디 메모(선택)도 남길 수 있고, 주간·월간 기분 추이를 그래프로 볼 수 있어요." } },
+        { "@type": "Question", "name": "할 일은 어떻게 관리하나요?", "acceptedAnswer": { "@type": "Answer", "text": "하고 싶은 일을 9가지 카테고리로 등록하고 기한을 정한 뒤, 완료를 체크해요. 주간·월간, 카테고리별·요일별 달성 현황을 확인할 수 있어요." } },
+        { "@type": "Question", "name": "새싹은 어떻게 자라나요?", "acceptedAnswer": { "@type": "Answer", "text": "할 일을 완료하면 새싹이 씨앗부터 개화까지 단계별로 자라요. 매일 이어가면 연속 기록(스트릭)이 쌓이고, 7일마다 정원 레벨이 올라가며 식물 도감도 하나씩 모을 수 있어요." } },
+        { "@type": "Question", "name": "친구와 어떻게 공유하나요?", "acceptedAnswer": { "@type": "Answer", "text": "서로 친구 요청을 수락하면 친구가 돼요. 달성 내역을 친구 피드에 공유할 수 있고, 부적절한 게시물은 신고하거나 사용자를 차단할 수 있어요." } },
+        { "@type": "Question", "name": "알림은 어떻게 오나요?", "acceptedAnswer": { "@type": "Answer", "text": "앱 설정에서 알림을 켜고 아침·저녁 시각을 정하면, 정한 시각에 기기 알림으로 기분 체크와 따뜻한 메시지를 받아요. 알림은 언제든 끄거나 시각을 바꿀 수 있어요." } },
+        { "@type": "Question", "name": "프리미엄은 무엇이 다르나요?", "acceptedAnswer": { "@type": "Answer", "text": "프리미엄을 구독하면 배너·전면 광고가 사라져 더 쾌적하게 이용할 수 있어요. 그 외 기분·할 일·성장·친구 공유 등 모든 기능은 무료에서도 동일하게 제공돼요." } },
+        { "@type": "Question", "name": "내 데이터는 안전한가요?", "acceptedAnswer": { "@type": "Answer", "text": "비밀번호 암호화, 전송 구간 암호화(HTTPS), 접근 권한 관리(RLS) 등으로 데이터를 보호해요. 앱 내 설정에서 회원 탈퇴 시 계정과 데이터가 즉시 삭제되며, 메일로 요청하시면 본인 확인 후 14일 이내에 삭제해 드려요." } }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
   <!-- 떠다니는 떡잎 낙엽 배경 (앱 SproutBackdrop) -->
@@ -488,7 +558,7 @@
           <path d="M45 44 Q50 49 55 44" stroke="#2d5016" stroke-width="2.2" stroke-linecap="round" fill="none"/>
         </svg>
       </div>
-      <h2 id="hero-heading">오늘도 <em>새싹</em>처럼<br />한 뼘씩 자라나요</h2>
+      <h1 id="hero-heading">오늘도 <em>새싹</em>처럼<br />한 뼘씩 자라나요</h1>
       <p class="lead">매일의 기분을 기록하고 하고 싶은 일을 새싹처럼 키워보세요. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나는 마음 습관 다이어리.</p>
       <span class="badge-soon">🌱 App Store · Google Play 준비 중</span>
       <div class="store-row">
