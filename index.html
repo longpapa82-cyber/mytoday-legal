@@ -10,7 +10,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:image" content="https://longpapa82-cyber.github.io/mytoday-legal/assets/banner.png" />
-<link rel="icon" href="./assets/favicon.png" />
+<link rel="icon" type="image/png" href="./assets/favicon.png" />
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- 앱과 동일한 3종 폰트: Jua(제목)·Gowun Dodum(본문)·Fredoka(브랜드 로고). 셋 다 단일 weight. -->
@@ -154,7 +155,7 @@
   .btn-ghost:hover { transform: translateY(-3px); }
   .btn-ghost:active { transform: scale(0.94); }
 
-  /* ── 스토어 버튼 (출시 예정) ── */
+  /* ── 스토어 버튼 (준비 중) ── */
   .badge-soon {
     display: inline-block; margin-bottom: 1rem;
     padding: 0.4rem 1rem; border-radius: 9999px;
@@ -216,7 +217,7 @@
   footer a:hover { text-decoration: underline; }
   footer .biz { font-size: 0.8rem; opacity: 0.85; line-height: 1.7; }
 
-  .disclaimer { max-width: 660px; margin: 0 auto; padding: 0 24px; text-align: center; font-size: 0.82rem; color: var(--on-surface-variant); opacity: 0.85; }
+  .disclaimer { max-width: 660px; margin: 0 auto 3rem; padding: 0 24px; text-align: center; font-size: 0.82rem; color: var(--on-surface-variant); opacity: 0.85; }
 </style>
 </head>
 <body>
@@ -244,15 +245,15 @@
       <div class="mascot" aria-hidden="true"><img src="./assets/mascot.png" alt="myToday 새싹 마스코트" /></div>
       <h2 id="hero-heading">오늘도 새싹처럼<br />한 뼘씩 자라나요</h2>
       <p class="lead">매일의 기분을 기록하고 하고 싶은 일을 새싹처럼 키워보세요. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나는 마음 습관 다이어리.</p>
-      <span class="badge-soon">🌱 곧 만나요 · 출시 예정</span>
+      <span class="badge-soon">🌱 App Store · Google Play 준비 중</span>
       <div class="store-row">
-        <span class="store-btn" role="button" aria-label="App Store 출시 예정">
+        <span class="store-btn" role="button" aria-label="App Store 준비 중">
           <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 3c.1 1-.3 2-1 2.8-.7.8-1.7 1.3-2.7 1.2-.1-1 .4-2 1-2.7.7-.8 1.8-1.3 2.7-1.3zM19 17c-.4 1-.6 1.4-1.1 2.3-.7 1.2-1.7 2.7-2.9 2.7-1.1 0-1.4-.7-2.9-.7s-1.8.7-2.9.7c-1.2 0-2.1-1.3-2.8-2.5C2.6 17.7 2.4 13.9 4 12c.9-1.1 2-1.6 3-1.6 1.1 0 1.8.7 2.9.7 1 0 1.6-.7 2.9-.7.9 0 1.9.4 2.7 1.2-2.4 1.3-2 4.7.6 5.4z"/></svg>
-          <span class="st"><small>App Store</small><b>출시 예정</b></span>
+          <span class="st"><small>App Store</small><b>준비 중</b></span>
         </span>
-        <span class="store-btn" role="button" aria-label="Google Play 출시 예정">
+        <span class="store-btn" role="button" aria-label="Google Play 준비 중">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3 13 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#00d4ff"/><path d="M17 8.2 13 12l-9.4-9.7c.3-.2.7-.2 1 0L17 8.2z" fill="#00f076"/><path d="M17 15.8 4.6 21.7c-.3.2-.7.2-1 0L13 12l4 3.8z" fill="#ff3a44"/><path d="m17 8.2 3.9 2.3c.7.4.7 1.6 0 2l-3.9 2.3L13 12l4-3.8z" fill="#ffc900"/></svg>
-          <span class="st"><small>Google Play</small><b>출시 예정</b></span>
+          <span class="st"><small>Google Play</small><b>준비 중</b></span>
         </span>
       </div>
     </section>
@@ -298,7 +299,17 @@
     <section class="closing" aria-labelledby="closing-heading">
       <h3 id="closing-heading">오늘도 새싹처럼 🌱</h3>
       <p>작은 습관이 모여 한 뼘씩 자라나는 나. myToday와 함께 성장해요.</p>
-      <a class="btn btn-primary" href="#">App Store에서 곧 만나요</a>
+      <span class="badge-soon">🌱 App Store · Google Play 준비 중</span>
+      <div class="store-row">
+        <span class="store-btn" role="button" aria-label="App Store 준비 중">
+          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 3c.1 1-.3 2-1 2.8-.7.8-1.7 1.3-2.7 1.2-.1-1 .4-2 1-2.7.7-.8 1.8-1.3 2.7-1.3zM19 17c-.4 1-.6 1.4-1.1 2.3-.7 1.2-1.7 2.7-2.9 2.7-1.1 0-1.4-.7-2.9-.7s-1.8.7-2.9.7c-1.2 0-2.1-1.3-2.8-2.5C2.6 17.7 2.4 13.9 4 12c.9-1.1 2-1.6 3-1.6 1.1 0 1.8.7 2.9.7 1 0 1.6-.7 2.9-.7.9 0 1.9.4 2.7 1.2-2.4 1.3-2 4.7.6 5.4z"/></svg>
+          <span class="st"><small>App Store</small><b>준비 중</b></span>
+        </span>
+        <span class="store-btn" role="button" aria-label="Google Play 준비 중">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3 13 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#00d4ff"/><path d="M17 8.2 13 12l-9.4-9.7c.3-.2.7-.2 1 0L17 8.2z" fill="#00f076"/><path d="M17 15.8 4.6 21.7c-.3.2-.7.2-1 0L13 12l4 3.8z" fill="#ff3a44"/><path d="m17 8.2 3.9 2.3c.7.4.7 1.6 0 2l-3.9 2.3L13 12l4-3.8z" fill="#ffc900"/></svg>
+          <span class="st"><small>Google Play</small><b>준비 중</b></span>
+        </span>
+      </div>
     </section>
 
     <p class="disclaimer">
