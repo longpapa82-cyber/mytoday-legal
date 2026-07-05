@@ -58,12 +58,17 @@
   body {
     margin: 0;
     position: relative;
-    /* 앱 SproutBackdrop 베이스 그라데이션 + 상단 햇살(sunGlow) 강조.
-       앱은 상단 중앙에 노란 햇살 글로우가 확연 → 웜톤 2겹으로 진하게. */
+    /* "새싹 정원의 하루" 배경 서사: 상단=아침 햇살(sun), 중단=새싹 연두, 하단=성숙한
+       깊은 잎색으로 자연 전환. 스크롤이 곧 씨앗→개화 성장 여정.
+       + 아주 옅은 도트 텍스처로 흰 벽 느낌 제거(앱 온보딩 bg-pattern 재현). */
     background:
-      radial-gradient(ellipse 90% 55% at 50% -5%, var(--sun) 0%, transparent 45%),
-      radial-gradient(ellipse 70% 45% at 50% 4%, var(--sun-glow) 0%, transparent 60%),
-      linear-gradient(180deg, var(--sprout-light) 0%, var(--surface-bright) 30%, var(--background) 100%);
+      radial-gradient(var(--sprout-light) 0.8px, transparent 0.9px),
+      radial-gradient(ellipse 90% 50% at 50% -5%, var(--sun) 0%, transparent 42%),
+      radial-gradient(ellipse 70% 42% at 50% 3%, var(--sun-glow) 0%, transparent 58%),
+      radial-gradient(ellipse 120% 40% at 50% 100%, var(--primary-container) 0%, transparent 55%),
+      linear-gradient(180deg, var(--sprout-light) 0%, var(--surface-bright) 24%, var(--background) 62%, #eef6df 100%);
+    background-size: 26px 26px, auto, auto, auto, auto;
+    background-position: 0 0, center, center, center, center;
     color: var(--on-surface);
     font-family: 'Gowun Dodum', system-ui, sans-serif;
     line-height: 1.75;
@@ -71,9 +76,26 @@
     overflow-x: hidden;
     min-height: 100vh;
   }
+  /* 도트 텍스처는 아주 옅게(전체 배경이 첫 레이어라 opacity 대신 색으로 조절 —
+     sprout-light 자체가 연해 26px 간격이면 은은한 그레인처럼 보인다). */
   /* 제목은 Jua(동글동글), 굵기는 폰트 자체·크기로만(단일 weight라 font-weight 미지정) */
   h1, h2, h3, h4 { font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400; }
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── 섹션 밴드(교차 배경 + 리듬) ── */
+  /* 짝수 섹션을 은은한 카드톤 밴드로 감싸 흰 벽 대신 리듬을 만든다.
+     둥근 상/하단 + 옅은 그림자로 "떠 있는 정원 층" 느낌. */
+  .band {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(202,245,154,0.16) 100%);
+    border-radius: var(--radius-xl);
+    margin: 0 12px;
+    box-shadow: 0 20px 50px -30px rgba(55,129,28,0.25);
+  }
+  .band.warm {
+    background: linear-gradient(180deg, rgba(255,243,214,0.55) 0%, rgba(255,225,191,0.20) 100%);
+  }
+  @media (max-width: 640px) { .band { margin: 0 4px; border-radius: var(--radius-lg); } }
 
   /* ── 떠다니는 떡잎 낙엽 배경 (SproutBackdrop 재현). ★position:absolute + 페이지
      전체 높이 → 스크롤 시 콘텐츠와 함께 흘러 자연스럽다(fixed면 화면에 멈춰 오류처럼 보임). ── */
@@ -82,26 +104,28 @@
     pointer-events: none; overflow: hidden;
   }
   .leaf {
-    position: absolute; width: clamp(70px, 9vw, 120px); aspect-ratio: 1;
+    position: absolute; width: clamp(84px, 11vw, 150px); aspect-ratio: 1;
     animation: float ease-in-out infinite;
     transform-origin: center;
+    filter: drop-shadow(0 6px 10px rgba(55,129,28,0.10));
   }
   .leaf svg { width: 100%; height: 100%; display: block; }
   /* top 은 페이지 전체 높이 기준으로 분산(스크롤하며 곳곳에 흩어져 지나감).
      scale은 --s 변수로 넘겨 @keyframes float가 translateY와 합성(초기 transform 미지정). */
-  .leaf.l1  { left: 10%; top: 6%;   --s: 1.05; opacity: .40; animation-duration: 2.8s; }
-  .leaf.l2  { left: 86%; top: 13%;  --s: .80;  opacity: .34; animation-duration: 3.2s; }
-  .leaf.l3  { left: 3%;  top: 26%;  --s: .90;  opacity: .32; animation-duration: 3.0s; }
-  .leaf.l4  { left: 92%; top: 36%;  --s: .72;  opacity: .28; animation-duration: 3.4s; }
-  .leaf.l5  { left: 8%;  top: 48%;  --s: 1.15; opacity: .32; animation-duration: 3.0s; }
-  .leaf.l6  { left: 88%; top: 57%;  --s: .85;  opacity: .30; animation-duration: 2.9s; }
-  .leaf.l7  { left: 5%;  top: 70%;  --s: .95;  opacity: .30; animation-duration: 3.1s; }
-  .leaf.l8  { left: 90%; top: 78%;  --s: .78;  opacity: .28; animation-duration: 3.3s; }
-  .leaf.l9  { left: 14%; top: 88%;  --s: 1.05; opacity: .30; animation-duration: 2.7s; }
-  .leaf.l10 { left: 82%; top: 95%;  --s: .85;  opacity: .28; animation-duration: 3.0s; }
+  .leaf.l1  { left: 9%;  top: 5%;   --s: 1.05; --r: -12deg; opacity: .52; animation-duration: 4.0s; }
+  .leaf.l2  { left: 87%; top: 12%;  --s: .80;  --r: 16deg;  opacity: .46; animation-duration: 4.6s; }
+  .leaf.l3  { left: 2%;  top: 25%;  --s: .92;  --r: 8deg;   opacity: .44; animation-duration: 4.2s; }
+  .leaf.l4  { left: 93%; top: 35%;  --s: .74;  --r: -20deg; opacity: .40; animation-duration: 4.8s; }
+  .leaf.l5  { left: 7%;  top: 47%;  --s: 1.18; --r: 14deg;  opacity: .44; animation-duration: 4.1s; }
+  .leaf.l6  { left: 89%; top: 56%;  --s: .86;  --r: -10deg; opacity: .42; animation-duration: 4.4s; }
+  .leaf.l7  { left: 4%;  top: 69%;  --s: .96;  --r: 18deg;  opacity: .42; animation-duration: 4.3s; }
+  .leaf.l8  { left: 91%; top: 77%;  --s: .78;  --r: -14deg; opacity: .40; animation-duration: 4.7s; }
+  .leaf.l9  { left: 13%; top: 87%;  --s: 1.06; --r: 10deg;  opacity: .42; animation-duration: 3.9s; }
+  .leaf.l10 { left: 83%; top: 94%;  --s: .86;  --r: -16deg; opacity: .40; animation-duration: 4.2s; }
+  /* 위아래 부유 + 미세 회전(정원의 산들바람). --r 로 잎마다 각도 변주. */
   @keyframes float {
-    0%, 100% { transform: translateY(0) scale(var(--s, 1)); }
-    50%      { transform: translateY(-8px) scale(var(--s, 1)); }
+    0%, 100% { transform: translateY(0) scale(var(--s, 1)) rotate(0deg); }
+    50%      { transform: translateY(-10px) scale(var(--s, 1)) rotate(var(--r, 0deg)); }
   }
   .dew {
     position: absolute; border-radius: 9999px;
@@ -140,6 +164,16 @@
     box-shadow: var(--shadow-clay), 0 0 70px -8px rgba(255, 243, 214, 0.9), 0 0 50px -12px rgba(184, 233, 134, 0.55);
     display: grid; place-items: center;
   }
+  /* 마스코트 뒤 회전하는 햇살 광선(conic) — 아침 정원 무드. */
+  .hero .mascot::before {
+    content: ''; position: absolute; inset: -22%; z-index: -1; border-radius: 9999px;
+    background: conic-gradient(from 0deg, transparent 0deg 14deg, rgba(255,209,102,0.28) 18deg 26deg, transparent 30deg 44deg, rgba(255,209,102,0.22) 48deg 56deg, transparent 60deg 74deg, rgba(255,209,102,0.28) 78deg 86deg, transparent 90deg 104deg, rgba(255,209,102,0.22) 108deg 116deg, transparent 120deg 134deg, rgba(255,209,102,0.28) 138deg 146deg, transparent 150deg 164deg, rgba(255,209,102,0.22) 168deg 176deg, transparent 180deg 194deg, rgba(255,209,102,0.28) 198deg 206deg, transparent 210deg 224deg, rgba(255,209,102,0.22) 228deg 236deg, transparent 240deg 254deg, rgba(255,209,102,0.28) 258deg 266deg, transparent 270deg 284deg, rgba(255,209,102,0.22) 288deg 296deg, transparent 300deg 314deg, rgba(255,209,102,0.28) 318deg 326deg, transparent 330deg 344deg, rgba(255,209,102,0.22) 348deg 356deg, transparent 360deg);
+    -webkit-mask: radial-gradient(circle, transparent 52%, #000 56%, #000 74%, transparent 80%);
+            mask: radial-gradient(circle, transparent 52%, #000 56%, #000 74%, transparent 80%);
+    animation: spin 26s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .hero .mascot::before { animation: none; } }
   /* 몸체 통통 바운스는 SVG 그룹에만 걸어 컨테이너 글로우와 분리(앱 MOTION happy: bounceY≈4px, 900ms 왕복) */
   .hero .mascot svg { width: 90%; height: 90%; display: block; transform-origin: 50% 88%; animation: bounce 1.8s ease-in-out infinite; }
   @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
@@ -156,6 +190,14 @@
   .hero h2 {
     font-size: clamp(2rem, 1rem + 6vw, 3.2rem); line-height: 1.25;
     letter-spacing: -0.02em; margin: 0 0 1rem; color: var(--leaf-deep);
+  }
+  /* 강조 단어: 새싹 그린 + 아래 물결 밑줄(의미적 색). */
+  .hero h2 em {
+    font-style: normal; color: var(--primary); position: relative; white-space: nowrap;
+  }
+  .hero h2 em::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -0.08em; height: 0.28em;
+    background: var(--sun); border-radius: 9999px; z-index: -1; opacity: 0.55;
   }
   .hero p.lead {
     font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.28rem);
@@ -200,15 +242,33 @@
 
   /* ── Features (bento clay cards) ── */
   .features { padding-bottom: var(--space-section); }
-  .features h3 { text-align: center; font-size: clamp(1.5rem, 1rem + 2vw, 2.1rem); color: var(--leaf-deep); margin: 0 0 2.5rem; }
+  .features { padding-top: var(--space-section); }
+  .features h3 { text-align: center; font-size: clamp(1.7rem, 1rem + 2.6vw, 2.5rem); color: var(--leaf-deep); margin: 0 0 2.5rem; letter-spacing: -0.01em; }
   .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  /* 베토: 3열 비대칭 — 첫 카드 2열 차지(대표), 나머지 자연 배치 → 그리드 브레이킹. */
+  .grid.bento { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; }
+  .grid.bento .big { grid-column: span 2; }
+  @media (max-width: 860px) { .grid.bento { grid-template-columns: repeat(2, 1fr); } .grid.bento .big { grid-column: span 2; } }
+  @media (max-width: 560px) { .grid.bento { grid-template-columns: 1fr; } .grid.bento .big { grid-column: span 1; } }
   .card {
     background: var(--surface-card); border: 2px solid #ffffff;
     border-radius: var(--radius-lg); padding: 1.9rem;
     box-shadow: var(--shadow-clay);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    position: relative; overflow: hidden;
   }
-  .card:hover { transform: translateY(-6px); }
+  /* 카드별 배경 틴트(균일 흰색 탈피 — 의미적 색). 아이콘 배경은 기존 유지. */
+  .card.tint-sprout { background: linear-gradient(160deg, #f2fbe6 0%, var(--surface-card) 70%); }
+  .card.tint-secondary { background: linear-gradient(160deg, #eefaf1 0%, var(--surface-card) 70%); }
+  .card.tint-sun { background: linear-gradient(160deg, #fff9ec 0%, var(--surface-card) 70%); }
+  .card.tint-peach { background: linear-gradient(160deg, #fff2ea 0%, var(--surface-card) 70%); }
+  /* 대표 카드(big): 더 큰 여백·강한 그림자·큰 아이콘으로 위계. */
+  .card.big { padding: 2.4rem; box-shadow: var(--shadow-clay), 0 24px 50px -24px rgba(55,129,28,0.35); }
+  .card.big .emoji { width: 70px; height: 70px; }
+  .card.big .emoji svg { width: 36px; height: 36px; }
+  .card.big h4 { font-size: 1.5rem; }
+  .card.big p { font-size: 1.05rem; }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-clay), 0 20px 40px -20px rgba(55,129,28,0.3); }
   .card .emoji {
     width: 58px; height: 58px; border-radius: var(--radius);
     background: var(--secondary-container);
@@ -231,9 +291,17 @@
   .closing p { color: var(--on-surface-variant); margin: 0 0 2rem; }
 
   /* ── 공통 섹션 제목 ── */
-  .sec { padding-bottom: var(--space-section); }
-  .sec > h3 { text-align: center; font-size: clamp(1.5rem, 1rem + 2vw, 2.1rem); color: var(--leaf-deep); margin: 0 0 0.6rem; }
-  .sec > .sub { text-align: center; color: var(--on-surface-variant); margin: 0 auto 2.5rem; max-width: 40ch; }
+  .sec { padding: var(--space-section) 0; }
+  .sec > h3 { text-align: center; font-size: clamp(1.7rem, 1rem + 2.6vw, 2.5rem); color: var(--leaf-deep); margin: 0 0 0.6rem; letter-spacing: -0.01em; }
+  .sec > .sub { text-align: center; color: var(--on-surface-variant); margin: 0 auto 2.8rem; max-width: 42ch; }
+  /* eyebrow: 섹션 제목 위 작은 라벨(편집적 위계) */
+  .eyebrow {
+    text-align: center; margin: 0 0 0.4rem;
+    font-family: 'Fredoka', 'Jua', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--leaf); opacity: 0.85;
+  }
+  .eyebrow::before { content: '🌱 '; }
 
   /* ── ① 사용방법 3단계 ── */
   .steps { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
@@ -251,6 +319,22 @@
   .detail .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
   .detail .tag { font-size: 0.82rem; padding: 0.3rem 0.8rem; border-radius: 9999px; background: var(--secondary-container); color: var(--leaf-deep); }
   @media (max-width: 680px) { .detail { grid-template-columns: 1fr; } .detail:nth-child(even) .demo { order: 0; } }
+  /* 데모 카드는 세로 스택(차트 위 + 칩 아래). */
+  .detail .demo { flex-direction: column; gap: 1rem; }
+  /* 기분 추이 미니 곡선 */
+  .moodchart { width: 100%; max-width: 300px; height: 110px; }
+  .moodchart .line { stroke-dasharray: 620; stroke-dashoffset: 620; }
+  .moodchart .area, .moodchart .dots { opacity: 0; }
+  /* 뷰포트 진입 시(.demo.in) 곡선 그려짐 + 면적/점 페이드. reduced-motion 이면 즉시. */
+  .demo.in .moodchart .line { animation: draw 1.6s ease forwards; }
+  .demo.in .moodchart .area { animation: fade 0.9s 0.8s ease forwards; }
+  .demo.in .moodchart .dots { animation: fade 0.5s 1.2s ease forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fade { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .moodchart .line { stroke-dashoffset: 0; }
+    .moodchart .area, .moodchart .dots { opacity: 1; }
+  }
   /* 기분 5칩 데모 */
   .moodchips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .moodchips .mc { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--on-surface-variant); transition: transform 0.2s; }
@@ -258,6 +342,30 @@
   .moodchips .mc span { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6), inset -1px -1px 3px rgba(0,0,0,0.04); }
   /* 앱 BrandMoodIcon 5표정 SVG(떡잎머리+얼굴+표정). 색은 leaf-deep 아웃라인. */
   .moodchips .mc svg { width: 32px; height: 32px; stroke: var(--leaf-deep); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* 할일 데모: 도넛 + 미니 체크리스트 가로 배치 */
+  .task-demo { flex-direction: row !important; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+  .donut .ring { transition: stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1); }
+  .demo.in .donut .ring { stroke-dashoffset: 72; } /* 75% ≈ 289*(1-0.75) */
+  @media (prefers-reduced-motion: reduce) { .donut .ring { stroke-dashoffset: 72; transition: none; } }
+  .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; text-align: left; }
+  .checklist li { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--on-surface); }
+  .checklist .cb { width: 18px; height: 18px; border-radius: 6px; border: 2px solid var(--outline); flex-shrink: 0; position: relative; }
+  .checklist .done { color: var(--on-surface-variant); }
+  .checklist .done .cb { background: var(--primary); border-color: var(--primary); }
+  .checklist .done .cb::after { content: '✓'; position: absolute; inset: 0; color: #fff; font-size: 12px; line-height: 14px; text-align: center; }
+
+  /* 성장 6단계 스트립 */
+  .grow-demo { flex-direction: column !important; }
+  .growstrip { display: flex; gap: 4px; align-items: flex-end; justify-content: center; flex-wrap: wrap; }
+  .gs { display: flex; flex-direction: column; align-items: center; gap: 4px; opacity: 0; transform: translateY(8px) scale(0.9); }
+  .gs svg { width: 40px; height: 44px; display: block; }
+  .gs small { font-size: 0.66rem; color: var(--on-surface-variant); }
+  .demo.in .gs { animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; animation-delay: calc(var(--i) * 160ms); }
+  .demo.in .gs.bloom { animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards, glow 2s calc(var(--i) * 160ms + 0.5s) ease-in-out infinite; }
+  @keyframes popIn { to { opacity: 1; transform: none; } }
+  @keyframes glow { 0%,100% { filter: drop-shadow(0 0 0 rgba(255,209,102,0)); } 50% { filter: drop-shadow(0 0 8px rgba(255,209,102,0.7)); } }
+  @media (prefers-reduced-motion: reduce) { .gs { opacity: 1; transform: none; } .demo.in .gs.bloom { animation: none; } }
 
   /* ── ③ 프리미엄 카드 ── */
   .premium { max-width: 620px; margin: 0 auto; background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-clay), 0 0 40px -12px rgba(184,233,134,0.5); padding: 2.2rem; text-align: center; }
@@ -295,6 +403,18 @@
   footer .biz { font-size: 0.8rem; opacity: 0.85; line-height: 1.7; }
 
   .disclaimer { max-width: 660px; margin: 0 auto 3rem; padding: 0 24px; text-align: center; font-size: 0.82rem; color: var(--on-surface-variant); opacity: 0.85; }
+
+  /* ── 스크롤 진입 애니메이션(reveal) ── */
+  /* JS(IntersectionObserver)가 뷰포트 진입 시 .in 을 붙인다. reduced-motion 또는
+     JS 미동작 시엔 처음부터 보이도록 .reveal 기본을 opacity:1 로 두고, JS 준비됨
+     (html.js-reveal)일 때만 초기 숨김을 적용한다 → 프로그레시브 인핸스먼트. */
+  html.js-reveal .reveal { opacity: 0; transform: translateY(24px); }
+  html.js-reveal .reveal.in { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  /* stagger: 같은 컨테이너 내 자식 순차 등장(인라인 style --i 로 지연). */
+  html.js-reveal .reveal[style*="--i"] { transition-delay: calc(var(--i) * 80ms); }
+  @media (prefers-reduced-motion: reduce) {
+    html.js-reveal .reveal { opacity: 1 !important; transform: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -361,7 +481,7 @@
           <path d="M45 44 Q50 49 55 44" stroke="#2d5016" stroke-width="2.2" stroke-linecap="round" fill="none"/>
         </svg>
       </div>
-      <h2 id="hero-heading">오늘도 새싹처럼<br />한 뼘씩 자라나요</h2>
+      <h2 id="hero-heading">오늘도 <em>새싹</em>처럼<br />한 뼘씩 자라나요</h2>
       <p class="lead">매일의 기분을 기록하고 하고 싶은 일을 새싹처럼 키워보세요. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나는 마음 습관 다이어리.</p>
       <span class="badge-soon">🌱 App Store · Google Play 준비 중</span>
       <div class="store-row">
@@ -377,58 +497,62 @@
     </section>
 
     <!-- ① 사용방법 3단계 -->
+    <div class="band">
     <section class="sec wrap" aria-labelledby="how-heading">
-      <h3 id="how-heading">이렇게 시작해요</h3>
-      <p class="sub">3단계면 충분해요. 오늘부터 새싹처럼 자라나요.</p>
+      <p class="eyebrow reveal">START</p>
+      <h3 id="how-heading" class="reveal">이렇게 시작해요</h3>
+      <p class="sub reveal">3단계면 충분해요. 오늘부터 새싹처럼 자라나요.</p>
       <div class="steps">
-        <div class="step">
+        <div class="step reveal" style="--i:0">
           <div class="num">1</div>
           <h4>가입하기</h4>
           <p>이메일 또는 구글·카카오·애플 계정으로 간편하게 시작해요.</p>
         </div>
-        <div class="step">
+        <div class="step reveal" style="--i:1">
           <div class="num">2</div>
           <h4>기분·할 일 기록</h4>
           <p>오늘의 기분을 5단계로 체크하고, 하고 싶은 일을 등록해요.</p>
         </div>
-        <div class="step">
+        <div class="step reveal" style="--i:2">
           <div class="num">3</div>
           <h4>새싹처럼 성장</h4>
           <p>할 일을 완료할수록 나의 새싹이 자라고 정원이 채워져요.</p>
         </div>
       </div>
     </section>
+    </div>
 
     <!-- Features -->
     <section class="features wrap" id="features" aria-labelledby="features-heading">
-      <h3 id="features-heading">myToday와 함께하는 하루</h3>
-      <div class="grid">
-        <article class="card sun">
+      <p class="eyebrow reveal">FEATURES</p>
+      <h3 id="features-heading" class="reveal">myToday와 함께하는 하루</h3>
+      <div class="grid bento">
+        <article class="card sun big reveal" style="--i:0">
           <div class="emoji" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="7"/><circle cx="9.5" cy="11.5" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="11.5" r="1" fill="currentColor" stroke="none"/><path d="M9.2 14.2 Q12 16.4 14.8 14.2" fill="none"/><path d="M12 5.5 Q10.4 3.6 8.6 4.4 Q9.2 6.4 12 6.2"/><path d="M12 5.5 Q13.6 3.6 15.4 4.4 Q14.8 6.4 12 6.2"/></svg></div>
           <h4>오늘의 기분 체크</h4>
           <p>5단계 기분으로 하루의 감정을 간단히 기록하고, 주간·기간별 기분 추이를 한눈에 확인해요.</p>
         </article>
-        <article class="card leaf-chip">
+        <article class="card leaf-chip tint-sprout reveal" style="--i:1">
           <div class="emoji" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19 V11"/><path d="M12 12 Q9.2 9.4 6.4 10.4 Q7.2 13.6 12 13" fill="currentColor"/><path d="M12 12 Q14.8 9.4 17.6 10.4 Q16.8 13.6 12 13" fill="currentColor"/><circle cx="12" cy="7.4" r="2.2" fill="currentColor" stroke="none"/></svg></div>
           <h4>오늘의 할 일</h4>
           <p>하고 싶은 일과 목표를 등록하고 완료를 체크하면, 나의 새싹이 한 뼘씩 자라나요.</p>
         </article>
-        <article class="card">
+        <article class="card tint-secondary reveal" style="--i:2">
           <div class="emoji" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13V6a1 1 0 0 1 1-1h6a7 7 0 0 1 0 14z"/><path d="M11 20c0-4 1-7 3-9"/></svg></div>
           <h4>성장하는 정원</h4>
           <p>매일의 기록이 스트릭과 레벨로 이어지고, 꾸준함이 눈에 보이는 성장으로 바뀌어요.</p>
         </article>
-        <article class="card leaf-chip">
+        <article class="card leaf-chip reveal" style="--i:3">
           <div class="emoji" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 8.2 Q10.4 5 7.4 5 Q4 5 4 8.4 Q4 11.6 7.6 14.4 Q10.2 16.5 12 19 Q13.8 16.5 16.4 14.4 Q20 11.6 20 8.4 Q20 5 16.6 5 Q13.6 5 12 8.2 Z"/><path d="M12 19 L12 21.4"/><path d="M12 12 Q9.6 9.8 7.2 11" fill="none"/></svg></div>
           <h4>친구와 함께</h4>
           <p>지인과 달성 내역을 공유하며 함께 성장하는 즐거움을 나눠요.</p>
         </article>
-        <article class="card sun">
+        <article class="card sun tint-sun reveal" style="--i:4">
           <div class="emoji" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6H4c.5-.5 2-2 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div>
           <h4>기분 체크 알림</h4>
           <p>매일 기분 체크 알림과 따뜻한 격려 메시지로 하루를 시작해요.</p>
         </article>
-        <article class="card peach">
+        <article class="card peach tint-peach reveal" style="--i:5">
           <div class="emoji" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
           <h4>광고 없이 쾌적하게</h4>
           <p>프리미엄 구독으로 배너·전면 광고를 제거해 더 가볍고 쾌적하게 기록해요.</p>
@@ -437,9 +561,11 @@
     </section>
 
     <!-- ② 기능 상세 -->
+    <div class="band warm">
     <section class="sec wrap" aria-labelledby="detail-heading">
-      <h3 id="detail-heading">조금 더 자세히</h3>
-      <p class="sub">매일의 작은 기록이 눈에 보이는 성장이 돼요.</p>
+      <p class="eyebrow reveal">DETAIL</p>
+      <h3 id="detail-heading" class="reveal">조금 더 자세히</h3>
+      <p class="sub reveal">매일의 작은 기록이 눈에 보이는 성장이 돼요.</p>
 
       <div class="detail">
         <div>
@@ -448,7 +574,20 @@
           <p>주간·월간 기분 추이를 곡선 그래프로 한눈에 돌아봐요.</p>
           <div class="tags"><span class="tag">우울</span><span class="tag">지침</span><span class="tag">평온</span><span class="tag">행복</span><span class="tag">신남</span></div>
         </div>
-        <div class="demo" aria-hidden="true">
+        <div class="demo reveal" aria-hidden="true">
+          <!-- 기분 추이 미니 곡선(앱 MoodChart 스타일, 예시 데이터) -->
+          <svg class="moodchart" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <line x1="0" y1="30" x2="300" y2="30" stroke="var(--outline)" stroke-width="1" opacity="0.3"/>
+            <line x1="0" y1="60" x2="300" y2="60" stroke="var(--outline)" stroke-width="1" opacity="0.3"/>
+            <line x1="0" y1="90" x2="300" y2="90" stroke="var(--outline)" stroke-width="1" opacity="0.3"/>
+            <path class="area" d="M10 78 C40 78 55 42 85 42 S130 66 155 66 S200 28 235 28 S280 50 290 50 L290 110 L10 110 Z" fill="url(#moodArea)"/>
+            <path class="line" d="M10 78 C40 78 55 42 85 42 S130 66 155 66 S200 28 235 28 S280 50 290 50" fill="none" stroke="var(--sprout)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <g class="dots">
+              <circle cx="85" cy="42" r="5" fill="#fff" stroke="var(--primary)" stroke-width="3"/>
+              <circle cx="235" cy="28" r="5" fill="#fff" stroke="var(--primary)" stroke-width="3"/>
+            </g>
+            <defs><linearGradient id="moodArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sprout-light)" stop-opacity="0.5"/><stop offset="1" stop-color="var(--sprout-light)" stop-opacity="0"/></linearGradient></defs>
+          </svg>
           <div class="moodchips">
             <div class="mc"><span style="background:var(--tertiary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><path d="M8.6 11.4 Q9.6 12 10.6 11.4"/><path d="M13.4 11.4 Q14.4 12 15.4 11.4"/><path d="M9.6 15.6 Q12 14 14.4 15.6"/></svg></span>우울</div>
             <div class="mc"><span style="background:var(--tertiary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><path d="M8.8 11.6 H10.6"/><path d="M13.4 11.6 H15.2"/><path d="M9.8 15 H14.2"/></svg></span>지침</div>
@@ -466,8 +605,18 @@
           <p>완료를 체크하면 주간·월간, 카테고리별·요일별 달성 현황을 볼 수 있어요.</p>
           <div class="tags"><span class="tag">웰니스</span><span class="tag">일</span><span class="tag">창작</span><span class="tag">건강</span><span class="tag">공부</span><span class="tag">+4</span></div>
         </div>
-        <div class="demo" aria-hidden="true">
-          <svg viewBox="0 0 120 120" width="130" height="130"><circle cx="60" cy="60" r="46" fill="none" stroke="#e3e9da" stroke-width="10"/><circle cx="60" cy="60" r="46" fill="none" stroke="#37811c" stroke-width="10" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="72" transform="rotate(-90 60 60)"/><text x="60" y="66" text-anchor="middle" font-family="Jua" font-size="22" fill="#2d5016">75%</text></svg>
+        <div class="demo reveal task-demo" aria-hidden="true">
+          <svg class="donut" viewBox="0 0 120 120" width="118" height="118">
+            <circle cx="60" cy="60" r="46" fill="none" stroke="#e3e9da" stroke-width="10"/>
+            <circle class="ring" cx="60" cy="60" r="46" fill="none" stroke="var(--primary)" stroke-width="10" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289" transform="rotate(-90 60 60)"/>
+            <text x="60" y="66" text-anchor="middle" font-family="Jua" font-size="22" fill="var(--leaf-deep)">75%</text>
+          </svg>
+          <ul class="checklist">
+            <li class="done"><span class="cb"></span>아침 산책 15분</li>
+            <li class="done"><span class="cb"></span>물 마시기</li>
+            <li class="done"><span class="cb"></span>책 30분 읽기</li>
+            <li><span class="cb"></span>저녁 스트레칭</li>
+          </ul>
         </div>
       </div>
 
@@ -478,24 +627,33 @@
           <p>꾸준함에 따라 들꽃·해바라기·튤립 등 식물 도감을 하나씩 모아요.</p>
           <div class="tags"><span class="tag">스트릭</span><span class="tag">정원 레벨</span><span class="tag">식물 도감 7종</span></div>
         </div>
-        <div class="demo" aria-hidden="true">
-          <svg viewBox="0 0 100 100" width="120" height="120">
-            <ellipse cx="50" cy="86" rx="26" ry="6" fill="#8b6f47"/>
-            <path d="M50 86 C48.5 74 48.5 62 50 54 C51.5 62 51.5 74 50 86 Z" fill="#4a8a2c"/>
-            <path d="M50 66 C38 70 26 64 21 52 C19 47 23 43 29 44 C38 46 47 54 50 66 Z" fill="#7cc242" stroke="#fff" stroke-width="1.4"/>
-            <path d="M50 66 C62 70 74 64 79 52 C81 47 77 43 71 44 C62 46 53 54 50 66 Z" fill="#7cc242" stroke="#fff" stroke-width="1.4"/>
-            <circle cx="50" cy="46" r="9" fill="#b8e986" stroke="#fff" stroke-width="1.4"/>
-            <circle cx="50" cy="40" r="6" fill="#ffd166" stroke="#fff" stroke-width="1.2"/>
-          </svg>
+        <div class="demo reveal grow-demo" aria-hidden="true">
+          <!-- 식물 6단계 성장 스트립: 씨앗→새싹→잎→줄기→꽃봉오리→개화 -->
+          <div class="growstrip">
+            <!-- 1 씨앗 -->
+            <div class="gs" style="--i:0"><svg viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="12" ry="3" fill="var(--soil)"/><ellipse cx="20" cy="34" rx="5" ry="7" fill="#a9814f" stroke="#fff" stroke-width="1"/></svg><small>씨앗</small></div>
+            <!-- 2 새싹 -->
+            <div class="gs" style="--i:1"><svg viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="12" ry="3" fill="var(--soil)"/><path d="M20 40 L20 30" stroke="#4a8a2c" stroke-width="2.4" stroke-linecap="round"/><path d="M20 32 C14 32 12 28 13 25 C17 25 20 28 20 32Z" fill="var(--sprout)"/></svg><small>새싹</small></div>
+            <!-- 3 떡잎 -->
+            <div class="gs" style="--i:2"><svg viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="12" ry="3" fill="var(--soil)"/><path d="M20 40 L20 24" stroke="#4a8a2c" stroke-width="2.6" stroke-linecap="round"/><path d="M20 30 C13 30 10 25 11 22 C16 22 20 26 20 30Z" fill="var(--sprout)"/><path d="M20 30 C27 30 30 25 29 22 C24 22 20 26 20 30Z" fill="var(--sprout)"/></svg><small>떡잎</small></div>
+            <!-- 4 줄기 -->
+            <div class="gs" style="--i:3"><svg viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="12" ry="3" fill="var(--soil)"/><path d="M20 40 L20 18" stroke="#4a8a2c" stroke-width="2.8" stroke-linecap="round"/><path d="M20 30 C12 30 9 25 10 21 C16 21 20 26 20 30Z" fill="var(--sprout)"/><path d="M20 26 C28 26 31 21 30 17 C24 17 20 22 20 26Z" fill="var(--sprout)"/></svg><small>줄기</small></div>
+            <!-- 5 꽃봉오리 -->
+            <div class="gs" style="--i:4"><svg viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="12" ry="3" fill="var(--soil)"/><path d="M20 40 L20 16" stroke="#4a8a2c" stroke-width="2.8" stroke-linecap="round"/><path d="M20 28 C12 28 9 23 10 19 C16 19 20 24 20 28Z" fill="var(--sprout)"/><ellipse cx="20" cy="13" rx="5" ry="7" fill="var(--sprout-light)" stroke="#fff" stroke-width="1"/></svg><small>봉오리</small></div>
+            <!-- 6 개화 -->
+            <div class="gs bloom" style="--i:5"><svg viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="12" ry="3" fill="var(--soil)"/><path d="M20 40 L20 16" stroke="#4a8a2c" stroke-width="2.8" stroke-linecap="round"/><path d="M20 28 C12 28 9 23 10 19 C16 19 20 24 20 28Z" fill="var(--sprout)"/><g><circle cx="14" cy="12" r="4" fill="var(--sun-peach)"/><circle cx="26" cy="12" r="4" fill="var(--sun-peach)"/><circle cx="20" cy="7" r="4" fill="var(--sun-peach)"/><circle cx="20" cy="17" r="4" fill="var(--sun-peach)"/><circle cx="20" cy="12" r="4" fill="var(--sun)"/></g></svg><small>개화</small></div>
+          </div>
         </div>
       </div>
     </section>
+    </div>
 
     <!-- ③ 프리미엄 안내 -->
     <section class="sec wrap" aria-labelledby="premium-heading">
-      <h3 id="premium-heading">myToday 프리미엄</h3>
-      <p class="sub">광고 없이 더 쾌적하게. 그 외 모든 기능은 무료와 동일해요.</p>
-      <div class="premium">
+      <p class="eyebrow reveal">PREMIUM</p>
+      <h3 id="premium-heading" class="reveal">myToday 프리미엄</h3>
+      <p class="sub reveal">광고 없이 더 쾌적하게. 그 외 모든 기능은 무료와 동일해요.</p>
+      <div class="premium reveal">
         <h4>광고 없이 더 쾌적하게</h4>
         <p class="price">월 3,300원 · 연 29,000원 <small style="opacity:.7">(스토어 기준)</small></p>
         <ul>
@@ -508,10 +666,12 @@
     </section>
 
     <!-- ④ FAQ -->
+    <div class="band">
     <section class="sec wrap" aria-labelledby="faq-heading">
-      <h3 id="faq-heading">자주 묻는 질문</h3>
-      <p class="sub">궁금한 점을 모았어요.</p>
-      <div class="faq">
+      <p class="eyebrow reveal">FAQ</p>
+      <h3 id="faq-heading" class="reveal">자주 묻는 질문</h3>
+      <p class="sub reveal">궁금한 점을 모았어요.</p>
+      <div class="faq reveal">
         <details><summary>어떻게 가입하나요?</summary><p>이메일로 가입하거나(6자리 인증 코드 확인) 구글·카카오·애플 계정으로 간편하게 시작할 수 있어요. 애플 로그인은 iPhone에서 제공돼요.</p></details>
         <details><summary>기분은 어떻게 기록하나요?</summary><p>하루에 한 번, 우울·지침·평온·행복·신남 5단계 중에서 지금의 기분을 골라요. 짧은 한마디 메모(선택)도 남길 수 있고, 주간·월간 기분 추이를 그래프로 볼 수 있어요.</p></details>
         <details><summary>할 일은 어떻게 관리하나요?</summary><p>하고 싶은 일을 9가지 카테고리로 등록하고 기한을 정한 뒤, 완료를 체크해요. 주간·월간, 카테고리별·요일별 달성 현황을 확인할 수 있어요.</p></details>
@@ -522,15 +682,17 @@
         <details><summary>내 데이터는 안전한가요?</summary><p>비밀번호 암호화, 전송 구간 암호화(HTTPS), 접근 권한 관리(RLS) 등으로 데이터를 보호해요. 앱 내 설정에서 회원 탈퇴 시 계정과 데이터가 즉시 삭제되며, 메일로 요청하시면 본인 확인 후 14일 이내에 삭제해 드려요. myToday의 기분 기록은 자기관리를 돕는 도구이며 의학적 진단·치료를 대체하지 않아요.</p></details>
       </div>
     </section>
+    </div>
 
     <!-- ⑤ 신뢰·안전 밴드 -->
     <section class="sec wrap" aria-labelledby="trust-heading">
-      <h3 id="trust-heading">믿고 쓸 수 있어요</h3>
+      <p class="eyebrow reveal">TRUST</p>
+      <h3 id="trust-heading" class="reveal">믿고 쓸 수 있어요</h3>
       <div class="trust">
-        <a href="./privacy.html"><div class="ti"><div class="ic">🔒</div><h5>데이터 보호</h5><p>암호화·HTTPS·접근 권한 관리(RLS)</p></div></a>
-        <a href="./delete-account.html"><div class="ti"><div class="ic">🗑️</div><h5>언제든 탈퇴</h5><p>앱 내 탈퇴 시 즉시 삭제</p></div></a>
-        <div class="ti"><div class="ic">🔞</div><h5>만 14세 이상</h5><p>안전한 이용 환경</p></div>
-        <a href="./terms.html"><div class="ti"><div class="ic">💬</div><h5>자기관리 도구</h5><p>의학적 조언을 대체하지 않아요</p></div></a>
+        <a href="./privacy.html" class="reveal" style="--i:0"><div class="ti"><div class="ic">🔒</div><h5>데이터 보호</h5><p>암호화·HTTPS·접근 권한 관리(RLS)</p></div></a>
+        <a href="./delete-account.html" class="reveal" style="--i:1"><div class="ti"><div class="ic">🗑️</div><h5>언제든 탈퇴</h5><p>앱 내 탈퇴 시 즉시 삭제</p></div></a>
+        <div class="ti reveal" style="--i:2"><div class="ic">🔞</div><h5>만 14세 이상</h5><p>안전한 이용 환경</p></div>
+        <a href="./terms.html" class="reveal" style="--i:3"><div class="ti"><div class="ic">💬</div><h5>자기관리 도구</h5><p>의학적 조언을 대체하지 않아요</p></div></a>
       </div>
     </section>
 
@@ -571,5 +733,27 @@
       © 2026 에이아이소프트. All rights reserved.
     </p>
   </footer>
+
+  <script>
+    // 스크롤 진입 애니메이션. reduced-motion 이면 관찰 없이 즉시 표시.
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var supported = 'IntersectionObserver' in window;
+      if (reduce || !supported) return; // 기본(보임) 유지 — 프로그레시브 인핸스먼트.
+
+      document.documentElement.classList.add('js-reveal');
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target); // 1회만.
+          }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
