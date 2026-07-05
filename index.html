@@ -253,8 +253,11 @@
   @media (max-width: 680px) { .detail { grid-template-columns: 1fr; } .detail:nth-child(even) .demo { order: 0; } }
   /* 기분 5칩 데모 */
   .moodchips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .moodchips .mc { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--on-surface-variant); }
-  .moodchips .mc span { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; }
+  .moodchips .mc { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--on-surface-variant); transition: transform 0.2s; }
+  .moodchips .mc:hover { transform: translateY(-4px) scale(1.06); }
+  .moodchips .mc span { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6), inset -1px -1px 3px rgba(0,0,0,0.04); }
+  /* 앱 BrandMoodIcon 5표정 SVG(떡잎머리+얼굴+표정). 색은 leaf-deep 아웃라인. */
+  .moodchips .mc svg { width: 32px; height: 32px; stroke: var(--leaf-deep); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ── ③ 프리미엄 카드 ── */
   .premium { max-width: 620px; margin: 0 auto; background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-clay), 0 0 40px -12px rgba(184,233,134,0.5); padding: 2.2rem; text-align: center; }
@@ -447,11 +450,11 @@
         </div>
         <div class="demo" aria-hidden="true">
           <div class="moodchips">
-            <div class="mc"><span style="background:var(--tertiary-container)">😢</span>우울</div>
-            <div class="mc"><span style="background:var(--tertiary-container)">😞</span>지침</div>
-            <div class="mc"><span style="background:var(--secondary-container)">😐</span>평온</div>
-            <div class="mc"><span style="background:var(--primary-container)">😊</span>행복</div>
-            <div class="mc"><span style="background:var(--primary-container)">🤩</span>신남</div>
+            <div class="mc"><span style="background:var(--tertiary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><path d="M8.6 11.4 Q9.6 12 10.6 11.4"/><path d="M13.4 11.4 Q14.4 12 15.4 11.4"/><path d="M9.6 15.6 Q12 14 14.4 15.6"/></svg></span>우울</div>
+            <div class="mc"><span style="background:var(--tertiary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><path d="M8.8 11.6 H10.6"/><path d="M13.4 11.6 H15.2"/><path d="M9.8 15 H14.2"/></svg></span>지침</div>
+            <div class="mc"><span style="background:var(--secondary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><circle cx="9.7" cy="11.6" r="1" fill="currentColor" stroke="none"/><circle cx="14.3" cy="11.6" r="1" fill="currentColor" stroke="none"/><path d="M9.8 14.6 Q12 15.8 14.2 14.6"/></svg></span>평온</div>
+            <div class="mc"><span style="background:var(--primary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><circle cx="9.7" cy="11.6" r="1" fill="currentColor" stroke="none"/><circle cx="14.3" cy="11.6" r="1" fill="currentColor" stroke="none"/><circle cx="8.2" cy="13.6" r="1" fill="currentColor" opacity="0.35" stroke="none"/><circle cx="15.8" cy="13.6" r="1" fill="currentColor" opacity="0.35" stroke="none"/><path d="M9.4 14.4 Q12 16.4 14.6 14.4"/></svg></span>행복</div>
+            <div class="mc"><span style="background:var(--primary-container)"><svg viewBox="0 0 24 24"><path d="M12 5.6 Q10.3 3.5 8.4 4.4 Q9 6.6 12 6.3"/><path d="M12 5.6 Q13.7 3.5 15.6 4.4 Q15 6.6 12 6.3"/><circle cx="12" cy="13" r="6.6"/><circle cx="9.7" cy="11.4" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.3" cy="11.4" r="1.2" fill="currentColor" stroke="none"/><path d="M9 14 Q12 17.6 15 14 Z" fill="currentColor"/></svg></span>신남</div>
           </div>
         </div>
       </div>
