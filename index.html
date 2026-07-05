@@ -76,19 +76,20 @@
     pointer-events: none; overflow: hidden;
   }
   .leaf {
-    position: absolute; width: 46px; height: 46px;
+    position: absolute; width: clamp(70px, 9vw, 120px); aspect-ratio: 1;
     animation: float ease-in-out infinite;
     transform-origin: center;
   }
   .leaf svg { width: 100%; height: 100%; display: block; }
-  /* 좌표·scale·opacity·duration은 앱 SproutBackdrop LEAVES 표 그대로.
-     scale은 --s 변수로 넘겨 @keyframes float가 translateY와 합성한다(초기 transform 미지정). */
-  .leaf.l1 { left: 12%; top: 10%;  --s: 1.05; opacity: .34; animation-duration: 2.8s; }
-  .leaf.l2 { left: 88%; top: 24%;  --s: .80;  opacity: .28; animation-duration: 3.2s; }
-  .leaf.l3 { left: 4%;  top: 52%;  --s: .90;  opacity: .26; animation-duration: 3.0s; }
-  .leaf.l4 { left: 92%; top: 70%;  --s: .72;  opacity: .22; animation-duration: 3.4s; }
-  .leaf.l5 { left: 16%; top: 84%;  --s: 1.10; opacity: .26; animation-duration: 3.0s; }
-  .leaf.l6 { left: 80%; top: 94%;  --s: .85;  opacity: .24; animation-duration: 2.9s; }
+  /* 좌표·scale·opacity·duration은 앱 SproutBackdrop LEAVES 표 기반. 웹은 화면이 넓어
+     기본 크기를 키우고(clamp) opacity를 살짝 올려 앱과 같은 시각 밀도를 낸다.
+     scale은 --s 변수로 넘겨 @keyframes float가 translateY와 합성(초기 transform 미지정). */
+  .leaf.l1 { left: 10%; top: 9%;   --s: 1.05; opacity: .40; animation-duration: 2.8s; }
+  .leaf.l2 { left: 86%; top: 22%;  --s: .80;  opacity: .34; animation-duration: 3.2s; }
+  .leaf.l3 { left: 3%;  top: 50%;  --s: .90;  opacity: .32; animation-duration: 3.0s; }
+  .leaf.l4 { left: 90%; top: 68%;  --s: .72;  opacity: .28; animation-duration: 3.4s; }
+  .leaf.l5 { left: 14%; top: 82%;  --s: 1.15; opacity: .32; animation-duration: 3.0s; }
+  .leaf.l6 { left: 82%; top: 92%;  --s: .85;  opacity: .30; animation-duration: 2.9s; }
   @keyframes float {
     0%, 100% { transform: translateY(0) scale(var(--s, 1)); }
     50%      { transform: translateY(-8px) scale(var(--s, 1)); }
