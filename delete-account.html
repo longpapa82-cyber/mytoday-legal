@@ -5,80 +5,102 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>myToday 계정 및 데이터 삭제 요청</title>
 <meta name="description" content="myToday(Joyful Day) 앱의 계정 및 데이터 삭제 요청 안내입니다." />
+<link rel="icon" href="./assets/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Fredoka:wght@600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --color-primary: #4a671d;
-    --color-primary-container: #d1f59a;
-    --color-on-surface: #191c1a;
-    --color-on-surface-variant: #44483b;
-    --color-surface: #f8faf6;
-    --color-surface-card: #ffffff;
-    --color-outline: #c4c8b7;
+    /* 앱 v2 "새싹 정원" 토큰 — index.html과 통일 */
+    --color-primary: #37811c;
+    --color-primary-container: #caf59a;
+    --color-leaf-deep: #2d5016;
+    --color-on-surface: #1a1c15;
+    --color-on-surface-variant: #454a3b;
+    --color-surface: #f4faec;
+    --color-surface-card: #fbfdf3;
+    --color-outline: #c2c8b3;
     --space-section: clamp(2rem, 1.5rem + 2vw, 3.5rem);
     --radius: 1.25rem;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--color-surface);
+    background:
+      radial-gradient(ellipse 80% 40% at 50% 0%, #fff3d6 0%, transparent 55%),
+      linear-gradient(180deg, #b8e986 0%, var(--color-surface-card) 30%, var(--color-surface) 100%);
+    background-attachment: fixed;
     color: var(--color-on-surface);
-    font-family: 'Noto Sans KR', 'Quicksand', system-ui, sans-serif;
-    line-height: 1.7;
+    font-family: 'Gowun Dodum', system-ui, sans-serif;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
+  h1, h2 { font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400; }
   .wrap { max-width: 720px; margin: 0 auto; padding: var(--space-section) 20px 5rem; }
-  header.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 2.5rem; }
+  header.brand { margin-bottom: 2.5rem; }
+  header.brand a { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
   header.brand .dot {
-    width: 40px; height: 40px; border-radius: 9999px;
-    background: var(--color-primary-container);
-    display: grid; place-items: center; font-size: 20px;
+    width: 44px; height: 44px; border-radius: 9999px; overflow: hidden;
+    background: var(--color-surface-card);
+    box-shadow: 0 6px 16px -6px rgba(55,129,28,0.25), inset 1px 1px 3px rgba(255,255,255,0.9);
+    display: grid; place-items: center;
   }
+  header.brand .dot img { width: 100%; height: 100%; object-fit: cover; }
   header.brand h1 {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin: 0;
+    font-family: 'Fredoka', 'Jua', sans-serif; font-weight: 600;
+    font-size: 1.5rem; color: var(--color-leaf-deep); margin: 0;
   }
   .doc-title {
     font-size: clamp(1.75rem, 1.2rem + 2.5vw, 2.5rem);
-    font-weight: 700; letter-spacing: -0.02em; margin: 0 0 1.5rem;
+    letter-spacing: -0.01em; margin: 0 0 1.5rem; color: var(--color-leaf-deep);
   }
   .card {
     background: var(--color-surface-card);
-    border: 1px solid var(--color-outline);
+    border: 2px solid #ffffff;
     border-radius: var(--radius);
     padding: 1.5rem 1.75rem;
     margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px -8px rgba(55,129,28,0.12), inset 2px 2px 4px rgba(255,255,255,0.9);
   }
   h2 {
-    font-size: 1.2rem; font-weight: 700; color: var(--color-primary);
+    font-size: 1.25rem; color: var(--color-primary);
     margin: 2rem 0 0.75rem;
   }
   ol, ul { margin: 0.5rem 0; padding-left: 1.4rem; }
   li { margin: 0.4rem 0; }
-  a { color: var(--color-primary); font-weight: 600; }
+  a { color: var(--color-primary); }
   .cta {
     display: inline-block; margin-top: 0.75rem;
     background: var(--color-primary); color: #fff;
-    padding: 0.85rem 1.5rem; border-radius: 9999px;
-    text-decoration: none; font-weight: 700;
+    padding: 0.85rem 1.6rem; border-radius: 9999px;
+    text-decoration: none; font-family: 'Jua', sans-serif;
+    box-shadow: 0 8px 18px -6px rgba(55,129,28,0.45);
   }
   table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
   th, td { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--color-outline); font-size: 0.95rem; }
-  th { color: var(--color-on-surface-variant); font-weight: 600; }
+  th { color: var(--color-on-surface-variant); }
+  .home-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 2rem;
+    color: var(--color-primary); text-decoration: none; font-family: 'Jua', sans-serif;
+  }
+  .home-link:hover { text-decoration: underline; }
   footer {
     margin-top: 3rem; padding-top: 1.5rem;
     border-top: 1px solid var(--color-outline);
     color: var(--color-on-surface-variant); font-size: 0.85rem;
   }
+  footer .links { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  footer a { color: var(--color-primary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
   <main class="wrap">
     <header class="brand">
-      <span class="dot">🌱</span>
-      <h1>myToday</h1>
+      <a href="./index.html" aria-label="myToday 홈">
+        <span class="dot"><img src="./assets/mascot.png" alt="" /></span>
+        <h1>myToday</h1>
+      </a>
     </header>
 
     <h1 class="doc-title">계정 및 데이터 삭제 요청</h1>
@@ -113,9 +135,16 @@
       <li>그 외 모든 개인정보는 삭제 요청 처리 시 지체 없이 파기합니다.</li>
     </ul>
 
+    <a class="home-link" href="./index.html">← 홈으로 돌아가기</a>
+
     <footer>
-      myToday (Joyful Day) · 문의: <a href="mailto:longpapa82@gmail.com">longpapa82@gmail.com</a><br />
-      <a href="./privacy.html">개인정보처리방침</a> · <a href="./terms.html">이용약관</a>
+      <div class="links">
+        <a href="./index.html">홈</a>
+        <a href="./privacy.html">개인정보처리방침</a>
+        <a href="./terms.html">이용약관</a>
+        <a href="mailto:longpapa82@gmail.com">문의하기</a>
+      </div>
+      myToday (Joyful Day) · 에이아이소프트 · 대표 박훈재
     </footer>
   </main>
 </body>
