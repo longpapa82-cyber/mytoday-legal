@@ -58,10 +58,11 @@
   body {
     margin: 0;
     position: relative;
-    /* 앱 SproutBackdrop 베이스 그라데이션: sproutLight → surfaceBright → background.
-       fixed 대신 스크롤 따라 흐르게(background-attachment 미지정 = scroll). */
+    /* 앱 SproutBackdrop 베이스 그라데이션 + 상단 햇살(sunGlow) 강조.
+       앱은 상단 중앙에 노란 햇살 글로우가 확연 → 웜톤 2겹으로 진하게. */
     background:
-      radial-gradient(ellipse 70% 40% at 50% 0%, var(--sun-glow) 0%, transparent 55%),
+      radial-gradient(ellipse 90% 55% at 50% -5%, var(--sun) 0%, transparent 45%),
+      radial-gradient(ellipse 70% 45% at 50% 4%, var(--sun-glow) 0%, transparent 60%),
       linear-gradient(180deg, var(--sprout-light) 0%, var(--surface-bright) 30%, var(--background) 100%);
     color: var(--on-surface);
     font-family: 'Gowun Dodum', system-ui, sans-serif;
@@ -137,18 +138,19 @@
     background: var(--surface-card);
     /* 웜톤 sunGlow 헤일로(역광 햇살) + 새싹 글로우 겹침 → 앱 무드 */
     box-shadow: var(--shadow-clay), 0 0 70px -8px rgba(255, 243, 214, 0.9), 0 0 50px -12px rgba(184, 233, 134, 0.55);
-    display: grid; place-items: center; animation: bob 4s ease-in-out infinite;
+    display: grid; place-items: center;
   }
-  .hero .mascot svg { width: 90%; height: 90%; display: block; }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-  /* 눈 깜빡임: 눈 그룹을 2.4s마다 세로로 감았다 뜬다(앱 blink 재현) */
-  .mascot .eyes { transform-box: fill-box; transform-origin: center; animation: blink 3.4s ease-in-out infinite; }
+  /* 몸체 통통 바운스는 SVG 그룹에만 걸어 컨테이너 글로우와 분리(앱 MOTION happy: bounceY≈4px, 900ms 왕복) */
+  .hero .mascot svg { width: 90%; height: 90%; display: block; transform-origin: 50% 88%; animation: bounce 1.8s ease-in-out infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  /* 눈 깜빡임: 앱 blink 재현(약 2.4s 주기로 짧게 감았다 뜸) */
+  .mascot .eyes { transform-box: fill-box; transform-origin: center; animation: blink 2.6s ease-in-out infinite; }
   @keyframes blink {
-    0%, 92%, 100% { transform: scaleY(1); }
-    95%, 97% { transform: scaleY(0.08); }
+    0%, 90%, 100% { transform: scaleY(1); }
+    93%, 96% { transform: scaleY(0.1); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero .mascot { animation: none; }
+    .hero .mascot svg { animation: none; }
     .mascot .eyes { animation: none; }
   }
   .hero h2 {
@@ -273,9 +275,10 @@
   .faq details p { margin: 0; padding: 0 1.4rem 1.2rem; color: var(--on-surface-variant); font-size: 0.96rem; line-height: 1.7; }
 
   /* ── ⑤ 신뢰·안전 밴드 ── */
-  .trust { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 900px; margin: 0 auto; }
+  .trust { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 900px; margin: 0 auto; align-items: stretch; }
+  .trust > a, .trust > .ti { display: block; height: 100%; }
   .trust a { text-decoration: none; color: inherit; }
-  .trust .ti { background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius); box-shadow: var(--shadow-clay); padding: 1.4rem; text-align: center; transition: transform 0.25s; }
+  .trust .ti { background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius); box-shadow: var(--shadow-clay); padding: 1.4rem; text-align: center; transition: transform 0.25s; height: 100%; display: flex; flex-direction: column; justify-content: center; }
   .trust .ti:hover { transform: translateY(-4px); }
   .trust .ti .ic { font-size: 28px; margin-bottom: 0.5rem; }
   .trust .ti h5 { margin: 0 0 0.3rem; font-family: 'Jua', sans-serif; color: var(--leaf-deep); font-size: 1.05rem; }
