@@ -228,6 +228,59 @@
   .closing h3 { font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem); color: var(--leaf-deep); margin: 0 0 0.8rem; }
   .closing p { color: var(--on-surface-variant); margin: 0 0 2rem; }
 
+  /* ── 공통 섹션 제목 ── */
+  .sec { padding-bottom: var(--space-section); }
+  .sec > h3 { text-align: center; font-size: clamp(1.5rem, 1rem + 2vw, 2.1rem); color: var(--leaf-deep); margin: 0 0 0.6rem; }
+  .sec > .sub { text-align: center; color: var(--on-surface-variant); margin: 0 auto 2.5rem; max-width: 40ch; }
+
+  /* ── ① 사용방법 3단계 ── */
+  .steps { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .step { background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius-lg); padding: 1.8rem; box-shadow: var(--shadow-clay); text-align: center; }
+  .step .num { width: 44px; height: 44px; margin: 0 auto 0.9rem; border-radius: 9999px; background: var(--primary-container); color: var(--leaf-deep); font-family: 'Jua', sans-serif; font-size: 1.2rem; display: grid; place-items: center; box-shadow: inset 1px 1px 3px rgba(255,255,255,0.8); }
+  .step h4 { margin: 0 0 0.4rem; font-size: 1.15rem; color: var(--on-surface); }
+  .step p { margin: 0; color: var(--on-surface-variant); font-size: 0.95rem; }
+
+  /* ── ② 기능 상세(좌우 교차) ── */
+  .detail { display: grid; gap: 24px; align-items: center; grid-template-columns: 1fr 1fr; margin-bottom: 2.5rem; }
+  .detail:nth-child(even) .demo { order: -1; }
+  .detail .demo { background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-clay); padding: 1.6rem; display: grid; place-items: center; min-height: 180px; }
+  .detail h4 { font-size: 1.35rem; color: var(--leaf-deep); margin: 0 0 0.6rem; }
+  .detail p { color: var(--on-surface-variant); margin: 0 0 0.6rem; }
+  .detail .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
+  .detail .tag { font-size: 0.82rem; padding: 0.3rem 0.8rem; border-radius: 9999px; background: var(--secondary-container); color: var(--leaf-deep); }
+  @media (max-width: 680px) { .detail { grid-template-columns: 1fr; } .detail:nth-child(even) .demo { order: 0; } }
+  /* 기분 5칩 데모 */
+  .moodchips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .moodchips .mc { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--on-surface-variant); }
+  .moodchips .mc span { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; }
+
+  /* ── ③ 프리미엄 카드 ── */
+  .premium { max-width: 620px; margin: 0 auto; background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-clay), 0 0 40px -12px rgba(184,233,134,0.5); padding: 2.2rem; text-align: center; }
+  .premium h4 { font-size: 1.4rem; color: var(--leaf-deep); margin: 0 0 0.4rem; }
+  .premium .price { font-family: 'Jua', sans-serif; color: var(--primary); font-size: 1.15rem; margin: 0.4rem 0 1.2rem; }
+  .premium ul { list-style: none; padding: 0; margin: 0 auto; max-width: 320px; text-align: left; display: grid; gap: 0.6rem; }
+  .premium li { display: flex; align-items: center; gap: 10px; color: var(--on-surface); }
+  .premium li::before { content: '🚫'; }
+  .premium .note { margin-top: 1.2rem; font-size: 0.85rem; color: var(--on-surface-variant); }
+
+  /* ── ④ FAQ 아코디언 ── */
+  .faq { max-width: 720px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq details { background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius); box-shadow: var(--shadow-clay); overflow: hidden; }
+  .faq summary { list-style: none; cursor: pointer; padding: 1.1rem 1.4rem; font-family: 'Jua', sans-serif; color: var(--leaf-deep); font-size: 1.05rem; display: flex; justify-content: space-between; align-items: center; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '＋'; color: var(--primary); font-size: 1.3rem; transition: transform 0.2s; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin: 0; padding: 0 1.4rem 1.2rem; color: var(--on-surface-variant); font-size: 0.96rem; line-height: 1.7; }
+
+  /* ── ⑤ 신뢰·안전 밴드 ── */
+  .trust { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 900px; margin: 0 auto; }
+  .trust a { text-decoration: none; color: inherit; }
+  .trust .ti { background: var(--surface-card); border: 2px solid #fff; border-radius: var(--radius); box-shadow: var(--shadow-clay); padding: 1.4rem; text-align: center; transition: transform 0.25s; }
+  .trust .ti:hover { transform: translateY(-4px); }
+  .trust .ti .ic { font-size: 28px; margin-bottom: 0.5rem; }
+  .trust .ti h5 { margin: 0 0 0.3rem; font-family: 'Jua', sans-serif; color: var(--leaf-deep); font-size: 1.05rem; }
+  .trust .ti p { margin: 0; font-size: 0.85rem; color: var(--on-surface-variant); }
+
   /* ── Footer ── */
   footer { border-top: 1px solid var(--outline); padding: 2.5rem 24px 3rem; text-align: center; color: var(--on-surface-variant); font-size: 0.9rem; }
   footer .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
@@ -317,6 +370,29 @@
       </div>
     </section>
 
+    <!-- ① 사용방법 3단계 -->
+    <section class="sec wrap" aria-labelledby="how-heading">
+      <h3 id="how-heading">이렇게 시작해요</h3>
+      <p class="sub">3단계면 충분해요. 오늘부터 새싹처럼 자라나요.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h4>가입하기</h4>
+          <p>이메일 또는 구글·카카오·애플 계정으로 간편하게 시작해요.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h4>기분·할 일 기록</h4>
+          <p>오늘의 기분을 5단계로 체크하고, 하고 싶은 일을 등록해요.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h4>새싹처럼 성장</h4>
+          <p>할 일을 완료할수록 나의 새싹이 자라고 정원이 채워져요.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Features -->
     <section class="features wrap" id="features" aria-labelledby="features-heading">
       <h3 id="features-heading">myToday와 함께하는 하루</h3>
@@ -351,6 +427,104 @@
           <h4>광고 없이 쾌적하게</h4>
           <p>프리미엄 구독으로 배너·전면 광고를 제거해 더 가볍고 쾌적하게 기록해요.</p>
         </article>
+      </div>
+    </section>
+
+    <!-- ② 기능 상세 -->
+    <section class="sec wrap" aria-labelledby="detail-heading">
+      <h3 id="detail-heading">조금 더 자세히</h3>
+      <p class="sub">매일의 작은 기록이 눈에 보이는 성장이 돼요.</p>
+
+      <div class="detail">
+        <div>
+          <h4>기분 기록 &amp; 추이</h4>
+          <p>하루에 한 번, 지금의 마음을 5단계로 남겨요. 짧은 한마디 메모(선택)도 함께 기록할 수 있어요.</p>
+          <p>주간·월간 기분 추이를 곡선 그래프로 한눈에 돌아봐요.</p>
+          <div class="tags"><span class="tag">우울</span><span class="tag">지침</span><span class="tag">평온</span><span class="tag">행복</span><span class="tag">신남</span></div>
+        </div>
+        <div class="demo" aria-hidden="true">
+          <div class="moodchips">
+            <div class="mc"><span style="background:var(--tertiary-container)">😢</span>우울</div>
+            <div class="mc"><span style="background:var(--tertiary-container)">😞</span>지침</div>
+            <div class="mc"><span style="background:var(--secondary-container)">😐</span>평온</div>
+            <div class="mc"><span style="background:var(--primary-container)">😊</span>행복</div>
+            <div class="mc"><span style="background:var(--primary-container)">🤩</span>신남</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div>
+          <h4>할 일 &amp; 달성</h4>
+          <p>하고 싶은 일과 목표를 9가지 카테고리로 정리하고, 오늘·내일·주말 등 기한을 정해요.</p>
+          <p>완료를 체크하면 주간·월간, 카테고리별·요일별 달성 현황을 볼 수 있어요.</p>
+          <div class="tags"><span class="tag">웰니스</span><span class="tag">일</span><span class="tag">창작</span><span class="tag">건강</span><span class="tag">공부</span><span class="tag">+4</span></div>
+        </div>
+        <div class="demo" aria-hidden="true">
+          <svg viewBox="0 0 120 120" width="130" height="130"><circle cx="60" cy="60" r="46" fill="none" stroke="#e3e9da" stroke-width="10"/><circle cx="60" cy="60" r="46" fill="none" stroke="#37811c" stroke-width="10" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="72" transform="rotate(-90 60 60)"/><text x="60" y="66" text-anchor="middle" font-family="Jua" font-size="22" fill="#2d5016">75%</text></svg>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div>
+          <h4>성장하는 정원 &amp; 도감</h4>
+          <p>할 일을 완료하면 새싹이 씨앗부터 개화까지 단계별로 자라요. 매일 이어가면 연속 기록(스트릭)이 쌓이고, 7일마다 정원 레벨이 올라요.</p>
+          <p>꾸준함에 따라 들꽃·해바라기·튤립 등 식물 도감을 하나씩 모아요.</p>
+          <div class="tags"><span class="tag">스트릭</span><span class="tag">정원 레벨</span><span class="tag">식물 도감 7종</span></div>
+        </div>
+        <div class="demo" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="120" height="120">
+            <ellipse cx="50" cy="86" rx="26" ry="6" fill="#8b6f47"/>
+            <path d="M50 86 C48.5 74 48.5 62 50 54 C51.5 62 51.5 74 50 86 Z" fill="#4a8a2c"/>
+            <path d="M50 66 C38 70 26 64 21 52 C19 47 23 43 29 44 C38 46 47 54 50 66 Z" fill="#7cc242" stroke="#fff" stroke-width="1.4"/>
+            <path d="M50 66 C62 70 74 64 79 52 C81 47 77 43 71 44 C62 46 53 54 50 66 Z" fill="#7cc242" stroke="#fff" stroke-width="1.4"/>
+            <circle cx="50" cy="46" r="9" fill="#b8e986" stroke="#fff" stroke-width="1.4"/>
+            <circle cx="50" cy="40" r="6" fill="#ffd166" stroke="#fff" stroke-width="1.2"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 프리미엄 안내 -->
+    <section class="sec wrap" aria-labelledby="premium-heading">
+      <h3 id="premium-heading">myToday 프리미엄</h3>
+      <p class="sub">광고 없이 더 쾌적하게. 그 외 모든 기능은 무료와 동일해요.</p>
+      <div class="premium">
+        <h4>광고 없이 더 쾌적하게</h4>
+        <p class="price">월 3,300원 · 연 29,000원 <small style="opacity:.7">(스토어 기준)</small></p>
+        <ul>
+          <li>화면 하단 배너 광고 제거</li>
+          <li>작업 중 뜨는 전면 광고 제거</li>
+          <li>광고 로딩이 없어 더 가볍게</li>
+        </ul>
+        <p class="note">프리미엄은 광고 제거 혜택을 제공해요. 기분·할 일·성장·친구 공유 등 모든 기능은 무료에서도 그대로 이용할 수 있어요. 구독 관리·해지는 App Store·Google Play의 구독 설정에서 할 수 있어요.</p>
+      </div>
+    </section>
+
+    <!-- ④ FAQ -->
+    <section class="sec wrap" aria-labelledby="faq-heading">
+      <h3 id="faq-heading">자주 묻는 질문</h3>
+      <p class="sub">궁금한 점을 모았어요.</p>
+      <div class="faq">
+        <details><summary>어떻게 가입하나요?</summary><p>이메일로 가입하거나(6자리 인증 코드 확인) 구글·카카오·애플 계정으로 간편하게 시작할 수 있어요. 애플 로그인은 iPhone에서 제공돼요.</p></details>
+        <details><summary>기분은 어떻게 기록하나요?</summary><p>하루에 한 번, 우울·지침·평온·행복·신남 5단계 중에서 지금의 기분을 골라요. 짧은 한마디 메모(선택)도 남길 수 있고, 주간·월간 기분 추이를 그래프로 볼 수 있어요.</p></details>
+        <details><summary>할 일은 어떻게 관리하나요?</summary><p>하고 싶은 일을 9가지 카테고리로 등록하고 기한을 정한 뒤, 완료를 체크해요. 주간·월간, 카테고리별·요일별 달성 현황을 확인할 수 있어요.</p></details>
+        <details><summary>새싹은 어떻게 자라나요?</summary><p>할 일을 완료하면 새싹이 씨앗부터 개화까지 단계별로 자라요. 매일 이어가면 연속 기록(스트릭)이 쌓이고, 7일마다 정원 레벨이 올라가며 식물 도감도 하나씩 모을 수 있어요.</p></details>
+        <details><summary>친구와 어떻게 공유하나요?</summary><p>서로 친구 요청을 수락하면 친구가 돼요. 달성 내역을 친구 피드에 공유할 수 있고, 부적절한 게시물은 신고하거나 사용자를 차단할 수 있어요.</p></details>
+        <details><summary>알림은 어떻게 오나요?</summary><p>앱 설정에서 알림을 켜고 아침·저녁 시각을 정하면, 정한 시각에 기기 알림으로 기분 체크와 따뜻한 메시지를 받아요. 알림은 언제든 끄거나 시각을 바꿀 수 있어요.</p></details>
+        <details><summary>프리미엄은 무엇이 다르나요?</summary><p>프리미엄을 구독하면 배너·전면 광고가 사라져 더 쾌적하게 이용할 수 있어요. 그 외 기분·할 일·성장·친구 공유 등 모든 기능은 무료에서도 동일하게 제공돼요.</p></details>
+        <details><summary>내 데이터는 안전한가요?</summary><p>비밀번호 암호화, 전송 구간 암호화(HTTPS), 접근 권한 관리(RLS) 등으로 데이터를 보호해요. 앱 내 설정에서 회원 탈퇴 시 계정과 데이터가 즉시 삭제되며, 메일로 요청하시면 본인 확인 후 14일 이내에 삭제해 드려요. myToday의 기분 기록은 자기관리를 돕는 도구이며 의학적 진단·치료를 대체하지 않아요.</p></details>
+      </div>
+    </section>
+
+    <!-- ⑤ 신뢰·안전 밴드 -->
+    <section class="sec wrap" aria-labelledby="trust-heading">
+      <h3 id="trust-heading">믿고 쓸 수 있어요</h3>
+      <div class="trust">
+        <a href="./privacy.html"><div class="ti"><div class="ic">🔒</div><h5>데이터 보호</h5><p>암호화·HTTPS·접근 권한 관리(RLS)</p></div></a>
+        <a href="./delete-account.html"><div class="ti"><div class="ic">🗑️</div><h5>언제든 탈퇴</h5><p>앱 내 탈퇴 시 즉시 삭제</p></div></a>
+        <div class="ti"><div class="ic">🔞</div><h5>만 14세 이상</h5><p>안전한 이용 환경</p></div>
+        <a href="./terms.html"><div class="ti"><div class="ic">💬</div><h5>자기관리 도구</h5><p>의학적 조언을 대체하지 않아요</p></div></a>
       </div>
     </section>
 
