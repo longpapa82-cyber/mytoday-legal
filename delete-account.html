@@ -37,7 +37,21 @@
     -webkit-font-smoothing: antialiased;
   }
   h1, h2 { font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: var(--space-section) 20px 5rem; }
+  body { position: relative; }
+  /* 떠다니는 떡잎 낙엽 배경 — index와 통일. 본문 안 가리게 양 끝·낮은 opacity. */
+  .backdrop { position: absolute; inset: 0; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+  .leaf { position: absolute; width: clamp(56px, 7vw, 92px); aspect-ratio: 1; animation: float ease-in-out infinite; transform-origin: center; }
+  .leaf svg { width: 100%; height: 100%; display: block; }
+  .leaf.l1 { left: 2%;  top: 8%;  --s: 1.0; opacity: .24; animation-duration: 2.8s; }
+  .leaf.l2 { left: 94%; top: 18%; --s: .8;  opacity: .20; animation-duration: 3.2s; }
+  .leaf.l3 { left: 1%;  top: 40%; --s: .9;  opacity: .20; animation-duration: 3.0s; }
+  .leaf.l4 { left: 95%; top: 58%; --s: .75; opacity: .18; animation-duration: 3.4s; }
+  .leaf.l5 { left: 3%;  top: 74%; --s: 1.0; opacity: .20; animation-duration: 3.0s; }
+  .leaf.l6 { left: 93%; top: 90%; --s: .85; opacity: .20; animation-duration: 2.9s; }
+  @keyframes float { 0%,100% { transform: translateY(0) scale(var(--s,1)); } 50% { transform: translateY(-7px) scale(var(--s,1)); } }
+  @media (prefers-reduced-motion: reduce) { .leaf { animation: none; transform: scale(var(--s,1)); } }
+  @media (max-width: 640px) { .leaf { display: none; } }
+  .wrap { max-width: 720px; margin: 0 auto; padding: var(--space-section) 20px 5rem; position: relative; }
   header.brand { margin-bottom: 2.5rem; }
   header.brand a { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
   header.brand .dot {
@@ -96,6 +110,8 @@
 </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="lgleaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8e986"/><stop offset="1" stop-color="#7cc242"/></linearGradient></defs></svg>
+  <div class="backdrop" aria-hidden="true"><span class="leaf l1"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lgleaf)" stroke="#fff" stroke-width="0.8"/></svg></span><span class="leaf l2"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lgleaf)" stroke="#fff" stroke-width="0.8"/></svg></span><span class="leaf l3"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lgleaf)" stroke="#fff" stroke-width="0.8"/></svg></span><span class="leaf l4"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lgleaf)" stroke="#fff" stroke-width="0.8"/></svg></span><span class="leaf l5"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lgleaf)" stroke="#fff" stroke-width="0.8"/></svg></span><span class="leaf l6"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lgleaf)" stroke="#fff" stroke-width="0.8"/></svg></span></div>
   <main class="wrap">
     <header class="brand">
       <a href="./index.html" aria-label="myToday 홈">
