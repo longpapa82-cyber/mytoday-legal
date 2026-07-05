@@ -28,6 +28,8 @@
     --secondary-container: #b8e9c8;
     --tertiary-container: #ffe1bf;
     --sun: #ffd166;
+    --sun-deep: #f5a623;
+    --sun-peach: #ffb088;
     --sun-glow: #fff3d6;
     --background: #f4faec;
     --surface-bright: #fbfdf3;
@@ -55,11 +57,12 @@
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    /* 앱 SproutBackdrop 베이스 그라데이션: sproutLight → surfaceBright → background */
+    position: relative;
+    /* 앱 SproutBackdrop 베이스 그라데이션: sproutLight → surfaceBright → background.
+       fixed 대신 스크롤 따라 흐르게(background-attachment 미지정 = scroll). */
     background:
-      radial-gradient(ellipse 70% 48% at 50% 14%, var(--sun-glow) 0%, transparent 60%),
-      linear-gradient(180deg, var(--sprout-light) 0%, var(--surface-bright) 45%, var(--background) 100%);
-    background-attachment: fixed;
+      radial-gradient(ellipse 70% 40% at 50% 0%, var(--sun-glow) 0%, transparent 55%),
+      linear-gradient(180deg, var(--sprout-light) 0%, var(--surface-bright) 30%, var(--background) 100%);
     color: var(--on-surface);
     font-family: 'Gowun Dodum', system-ui, sans-serif;
     line-height: 1.75;
@@ -71,9 +74,10 @@
   h1, h2, h3, h4 { font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400; }
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
-  /* ── 떠다니는 떡잎 낙엽 배경 (SproutBackdrop 재현: 떡잎 6장 float + 이슬 4개) ── */
+  /* ── 떠다니는 떡잎 낙엽 배경 (SproutBackdrop 재현). ★position:absolute + 페이지
+     전체 높이 → 스크롤 시 콘텐츠와 함께 흘러 자연스럽다(fixed면 화면에 멈춰 오류처럼 보임). ── */
   .backdrop {
-    position: fixed; inset: 0; z-index: -1;
+    position: absolute; inset: 0; height: 100%; z-index: -1;
     pointer-events: none; overflow: hidden;
   }
   .leaf {
@@ -82,15 +86,18 @@
     transform-origin: center;
   }
   .leaf svg { width: 100%; height: 100%; display: block; }
-  /* 좌표·scale·opacity·duration은 앱 SproutBackdrop LEAVES 표 기반. 웹은 화면이 넓어
-     기본 크기를 키우고(clamp) opacity를 살짝 올려 앱과 같은 시각 밀도를 낸다.
+  /* top 은 페이지 전체 높이 기준으로 분산(스크롤하며 곳곳에 흩어져 지나감).
      scale은 --s 변수로 넘겨 @keyframes float가 translateY와 합성(초기 transform 미지정). */
-  .leaf.l1 { left: 10%; top: 9%;   --s: 1.05; opacity: .40; animation-duration: 2.8s; }
-  .leaf.l2 { left: 86%; top: 22%;  --s: .80;  opacity: .34; animation-duration: 3.2s; }
-  .leaf.l3 { left: 3%;  top: 50%;  --s: .90;  opacity: .32; animation-duration: 3.0s; }
-  .leaf.l4 { left: 90%; top: 68%;  --s: .72;  opacity: .28; animation-duration: 3.4s; }
-  .leaf.l5 { left: 14%; top: 82%;  --s: 1.15; opacity: .32; animation-duration: 3.0s; }
-  .leaf.l6 { left: 82%; top: 92%;  --s: .85;  opacity: .30; animation-duration: 2.9s; }
+  .leaf.l1  { left: 10%; top: 6%;   --s: 1.05; opacity: .40; animation-duration: 2.8s; }
+  .leaf.l2  { left: 86%; top: 13%;  --s: .80;  opacity: .34; animation-duration: 3.2s; }
+  .leaf.l3  { left: 3%;  top: 26%;  --s: .90;  opacity: .32; animation-duration: 3.0s; }
+  .leaf.l4  { left: 92%; top: 36%;  --s: .72;  opacity: .28; animation-duration: 3.4s; }
+  .leaf.l5  { left: 8%;  top: 48%;  --s: 1.15; opacity: .32; animation-duration: 3.0s; }
+  .leaf.l6  { left: 88%; top: 57%;  --s: .85;  opacity: .30; animation-duration: 2.9s; }
+  .leaf.l7  { left: 5%;  top: 70%;  --s: .95;  opacity: .30; animation-duration: 3.1s; }
+  .leaf.l8  { left: 90%; top: 78%;  --s: .78;  opacity: .28; animation-duration: 3.3s; }
+  .leaf.l9  { left: 14%; top: 88%;  --s: 1.05; opacity: .30; animation-duration: 2.7s; }
+  .leaf.l10 { left: 82%; top: 95%;  --s: .85;  opacity: .28; animation-duration: 3.0s; }
   @keyframes float {
     0%, 100% { transform: translateY(0) scale(var(--s, 1)); }
     50%      { transform: translateY(-8px) scale(var(--s, 1)); }
@@ -125,14 +132,25 @@
   /* ── Hero ── */
   .hero { text-align: center; padding: clamp(1rem, 0.5rem + 3vw, 3rem) 24px var(--space-section); max-width: 780px; margin: 0 auto; }
   .hero .mascot {
-    width: clamp(140px, 32vw, 200px); height: clamp(140px, 32vw, 200px);
-    margin: 0 auto 1.6rem; border-radius: 9999px; overflow: hidden;
-    background: var(--surface-card); box-shadow: var(--shadow-clay), 0 0 60px -10px rgba(184, 233, 134, 0.6);
+    width: clamp(150px, 34vw, 220px); height: clamp(150px, 34vw, 220px);
+    margin: 0 auto 1.6rem; border-radius: 9999px; position: relative;
+    background: var(--surface-card);
+    /* 웜톤 sunGlow 헤일로(역광 햇살) + 새싹 글로우 겹침 → 앱 무드 */
+    box-shadow: var(--shadow-clay), 0 0 70px -8px rgba(255, 243, 214, 0.9), 0 0 50px -12px rgba(184, 233, 134, 0.55);
     display: grid; place-items: center; animation: bob 4s ease-in-out infinite;
   }
-  .hero .mascot img { width: 84%; height: 84%; object-fit: contain; }
+  .hero .mascot svg { width: 90%; height: 90%; display: block; }
   @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-  @media (prefers-reduced-motion: reduce) { .hero .mascot { animation: none; } }
+  /* 눈 깜빡임: 눈 그룹을 2.4s마다 세로로 감았다 뜬다(앱 blink 재현) */
+  .mascot .eyes { transform-box: fill-box; transform-origin: center; animation: blink 3.4s ease-in-out infinite; }
+  @keyframes blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    95%, 97% { transform: scaleY(0.08); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .mascot { animation: none; }
+    .mascot .eyes { animation: none; }
+  }
   .hero h2 {
     font-size: clamp(2rem, 1rem + 6vw, 3.2rem); line-height: 1.25;
     letter-spacing: -0.02em; margin: 0 0 1rem; color: var(--leaf-deep);
@@ -229,6 +247,10 @@
     <span class="leaf l4"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
     <span class="leaf l5"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
     <span class="leaf l6"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
+    <span class="leaf l7"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
+    <span class="leaf l8"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
+    <span class="leaf l9"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
+    <span class="leaf l10"><svg viewBox="-12 -18 24 24"><path d="M0 0 C-7 -2 -11 -8 -10 -15 C-3 -15 3 -10 4 -2 C4 -1 2 0 0 0 Z" fill="url(#lg1)" stroke="#fff" stroke-width="0.8"/></svg></span>
     <span class="dew d1"></span><span class="dew d2"></span><span class="dew d3"></span><span class="dew d4"></span>
   </div>
 
@@ -242,7 +264,44 @@
   <main>
     <!-- Hero -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="mascot" aria-hidden="true"><img src="./assets/mascot.png" alt="myToday 새싹 마스코트" /></div>
+      <div class="mascot" role="img" aria-label="myToday 새싹 마스코트">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fbf5a"/><stop offset="1" stop-color="#4a8a2c"/></linearGradient>
+            <linearGradient id="leafGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8e986"/><stop offset="1" stop-color="#7cc242"/></linearGradient>
+            <radialGradient id="faceGrad" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#ffffff"/><stop offset="0.6" stop-color="#b8e986"/><stop offset="1" stop-color="#7cc242"/></radialGradient>
+          </defs>
+          <!-- 흙 둔덕 -->
+          <ellipse cx="50" cy="90" rx="30" ry="7" fill="#8b6f47"/>
+          <ellipse cx="50" cy="87" rx="30" ry="6" fill="#5e4a30" opacity="0.22"/>
+          <path d="M30 88 C27 84 27 81 30 80 C31 83 31 86 30 88 Z" fill="#7cc242" opacity="0.7"/>
+          <path d="M71 88 C74 84 74 81 71 80 C70 83 70 86 71 88 Z" fill="#7cc242" opacity="0.7"/>
+          <!-- 줄기 -->
+          <path d="M50 88 C48.5 74 48.5 60 50 50 C51.5 60 51.5 74 50 88 Z" fill="url(#stemGrad)"/>
+          <path d="M50 86 L50 52" stroke="#4a8a2c" stroke-width="4" stroke-linecap="round"/>
+          <!-- 왼쪽 떡잎 -->
+          <path d="M50 66 C36 70 22 64 16 50 C14 44 18 40 25 41 C36 43 46 53 50 66 Z" fill="url(#leafGrad)" stroke="#fff" stroke-width="1.6"/>
+          <path d="M48 64 C39 58 30 53 21 49" stroke="#2d5016" stroke-width="1.3" stroke-linecap="round" opacity="0.35" fill="none"/>
+          <ellipse cx="29" cy="50" rx="5" ry="3.2" fill="#fff" opacity="0.55"/>
+          <!-- 오른쪽 떡잎 -->
+          <path d="M50 66 C64 70 78 64 84 50 C86 44 82 40 75 41 C64 43 54 53 50 66 Z" fill="url(#leafGrad)" stroke="#fff" stroke-width="1.6"/>
+          <path d="M52 64 C61 58 70 53 79 49" stroke="#2d5016" stroke-width="1.3" stroke-linecap="round" opacity="0.35" fill="none"/>
+          <ellipse cx="71" cy="50" rx="5" ry="3.2" fill="#fff" opacity="0.55"/>
+          <!-- 얼굴 -->
+          <circle cx="50" cy="39" r="16.5" fill="url(#faceGrad)" stroke="#fff" stroke-width="1.6"/>
+          <ellipse cx="44" cy="33" rx="5" ry="3.6" fill="#fff" opacity="0.5"/>
+          <circle cx="40" cy="43" r="3" fill="#ffb088" opacity="0.55"/>
+          <circle cx="60" cy="43" r="3" fill="#ffb088" opacity="0.55"/>
+          <!-- happy 표정: 동그란 눈+흰반짝(깜빡임 그룹) + 환한 미소 -->
+          <g class="eyes">
+            <circle cx="44" cy="37" r="3" fill="#2d5016"/>
+            <circle cx="56" cy="37" r="3" fill="#2d5016"/>
+            <circle cx="43" cy="35.9" r="1.1" fill="#fff"/>
+            <circle cx="55" cy="35.9" r="1.1" fill="#fff"/>
+          </g>
+          <path d="M45 44 Q50 49 55 44" stroke="#2d5016" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
       <h2 id="hero-heading">오늘도 새싹처럼<br />한 뼘씩 자라나요</h2>
       <p class="lead">매일의 기분을 기록하고 하고 싶은 일을 새싹처럼 키워보세요. 작은 습관이 모여 한 뼘씩 자라나는 나를 만나는 마음 습관 다이어리.</p>
       <span class="badge-soon">🌱 App Store · Google Play 준비 중</span>
