@@ -10,4 +10,4 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-Sitemap: https://longpapa82-cyber.github.io/mytoday-legal/sitemap.xml
+Sitemap: https://my-today.net/sitemap.xml
