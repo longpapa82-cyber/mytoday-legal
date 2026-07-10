@@ -27,6 +27,87 @@
       "title": "myToday 처음 시작하기: 5분이면 끝나는 온보딩 가이드",
       "excerpt": "가입부터 아침 기분 체크, 오늘 할 일 등록, 완료 체크, 기분 추이 확인, 친구 공유까지. 처음 쓰는 분을 위한 단계별 시작 가이드.",
       "published": "2026-06-10"
+    },
+    {
+      "slug": "morning-mood-check-habit",
+      "cat": "mood",
+      "catLabel": "기분 기록",
+      "emoji": "🌅",
+      "title": "아침 기분 체크 습관 만들기: 하루를 여는 1분 루틴",
+      "excerpt": "매일 아침 이모지 하나로 기분을 체크하는 습관 만드는 법. 알림 활용, 커피·양치 같은 트리거 결합, 부담 낮추기까지 하루를 여는 1분 모닝 루틴.",
+      "published": "2026-06-25"
+    },
+    {
+      "slug": "mood-trend-meaning",
+      "cat": "mood",
+      "catLabel": "기분 기록",
+      "emoji": "📈",
+      "title": "기분 그래프가 알려준 것: 나의 감정 패턴 읽는 법",
+      "excerpt": "기간별 기분 추이 그래프를 해석하는 법. 요일·수면·날씨와의 상관, 하강 구간 대비까지 데이터로 나를 이해하는 이야기.",
+      "published": "2026-06-28"
+    },
+    {
+      "slug": "small-wins-motivation",
+      "cat": "todo",
+      "catLabel": "할 일·습관",
+      "emoji": "🌿",
+      "title": "작은 완료의 심리학: 새싹이 자라듯 쌓이는 성취감",
+      "excerpt": "작은 할 일을 완료 체크할 때 성취감이 쌓이는 심리. 진행률과 새싹 성장의 은유로 동기를 유지하는 법을 담았어요.",
+      "published": "2026-06-22"
+    },
+    {
+      "slug": "todo-vs-goal-setting",
+      "cat": "todo",
+      "catLabel": "할 일·습관",
+      "emoji": "🎯",
+      "title": "할 일과 목표는 다르다: 오늘 하고 싶은 일 적기의 기술",
+      "excerpt": "거창한 목표 대신 '오늘 하고 싶은 일' 단위로 적는 기술. 실행 가능성과 자기효능감을 높이는 데일리 목표 작성법.",
+      "published": "2026-06-18"
+    },
+    {
+      "slug": "daily-gratitude-journal",
+      "cat": "wellness",
+      "catLabel": "마음 습관",
+      "emoji": "🙏",
+      "title": "감사 일기 3줄의 효과: 부담 없이 시작하는 마음 습관",
+      "excerpt": "하루 3줄 감사 기록의 심리적 효용. 긍정에 초점을 두고 부담을 최소화하며 시작하는 감사 노트 습관 이야기.",
+      "published": "2026-07-02"
+    },
+    {
+      "slug": "self-care-routine-app",
+      "cat": "wellness",
+      "catLabel": "마음 습관",
+      "emoji": "🌤️",
+      "title": "번아웃 직전, 나를 지킨 작은 루틴들",
+      "excerpt": "번아웃 신호를 알아채고 기분 체크·응원 메시지·소소한 할 일로 회복한 이야기. 부담 없이 나를 돌보는 셀프케어 루틴.",
+      "published": "2026-07-05"
+    },
+    {
+      "slug": "positive-message-daily",
+      "cat": "wellness",
+      "catLabel": "마음 습관",
+      "emoji": "💌",
+      "title": "매일 받는 응원 한마디가 만든 변화",
+      "excerpt": "myToday의 응원·독려 메시지를 매일 받으며 생긴 작은 변화. 긍정 심리와 다정한 자기대화의 힘을 담았어요.",
+      "published": "2026-07-08"
+    },
+    {
+      "slug": "mytoday-vs-notion-diary",
+      "cat": "guide",
+      "catLabel": "앱 활용",
+      "emoji": "🆚",
+      "title": "노션·일반 다이어리 대신 myToday를 쓰는 이유",
+      "excerpt": "노션·종이 다이어리와 공정하게 비교한 myToday의 강점. 낮은 진입장벽, 기분+할 일 통합, 추이 시각화, 아침 알림.",
+      "published": "2026-07-01"
+    },
+    {
+      "slug": "mytoday-share-friends",
+      "cat": "guide",
+      "catLabel": "앱 활용",
+      "emoji": "🤝",
+      "title": "친구와 완료 내역 공유하기: 함께라서 지속되는 습관",
+      "excerpt": "친구와 완료 내역을 공유하는 기능 활용법. 선의의 경쟁과 응원으로 함께라서 더 오래 가는 습관 이야기.",
+      "published": "2026-06-30"
     }
   ]
 }
