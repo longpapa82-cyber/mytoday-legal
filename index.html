@@ -166,8 +166,11 @@
   }
 
   /* ── Header ── */
-  header.brand { display: flex; align-items: center; gap: 12px; padding: 24px; max-width: 960px; margin: 0 auto; }
-  header.brand a { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  header.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 24px; max-width: 960px; margin: 0 auto; }
+  header.brand .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  header.brand .nav { display: flex; gap: 18px; align-items: center; }
+  header.brand .nav a { font-family: 'Gowun Dodum', sans-serif; font-size: 0.98rem; color: var(--on-surface-variant); text-decoration: none; transition: color 0.2s; }
+  header.brand .nav a:hover { color: var(--primary); }
   header.brand .dot {
     width: 46px; height: 46px; border-radius: 9999px; overflow: hidden;
     background: var(--surface-card); box-shadow: var(--shadow-clay);
@@ -526,10 +529,13 @@
   </div>
 
   <header class="brand">
-    <a href="./index.html" aria-label="myToday 홈">
+    <a class="logo" href="./index.html" aria-label="myToday 홈">
       <span class="dot"><img src="./assets/mascot.png" alt="" /></span>
       <span class="name">myToday</span>
     </a>
+    <nav class="nav">
+      <a href="./blog/">블로그</a>
+    </nav>
   </header>
 
   <main>

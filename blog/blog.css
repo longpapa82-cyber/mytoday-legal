@@ -1,0 +1,252 @@
+/* ===================================================================
+   myToday 블로그 공용 스타일 — "새싹 정원" 디자인 시스템
+   루트 index.html의 :root 토큰·폰트·클레이모피즘을 그대로 계승한다.
+   블로그 3종 페이지(목록/글)가 <link>로 공유 → 드리프트 방지·유지보수 단일화.
+   =================================================================== */
+
+:root {
+  /* 앱 v2 "새싹 정원" 색 토큰 (src/constants/colors.ts) — index.html과 동일 */
+  --primary: #37811c;
+  --leaf-deep: #2d5016;
+  --leaf: #4a8a2c;
+  --sprout: #7cc242;
+  --sprout-light: #b8e986;
+  --primary-container: #caf59a;
+  --secondary-container: #b8e9c8;
+  --tertiary-container: #ffe1bf;
+  --sun: #ffd166;
+  --sun-deep: #f5a623;
+  --sun-peach: #ffb088;
+  --sun-glow: #fff3d6;
+  --background: #f4faec;
+  --surface-bright: #fbfdf3;
+  --surface-card: #fbfdf3;
+  --on-surface: #1a1c15;
+  --on-surface-variant: #454a3b;
+  --outline: #c2c8b3;
+  --soil: #8b6f47;
+
+  --radius: 16px;
+  --radius-lg: 32px;
+  --radius-xl: 48px;
+  --space-section: clamp(3rem, 2rem + 5vw, 6rem);
+  --shadow-clay:
+    0 10px 25px -5px rgba(55, 129, 28, 0.14),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 6px rgba(0, 0, 0, 0.02);
+  --shadow-clay-btn:
+    0 8px 18px -6px rgba(55, 129, 28, 0.45),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.5),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.06);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  /* 랜딩과 동일한 정원 배경 서사(옅은 도트 텍스처 + 상단 햇살 + 하단 잎색). */
+  background:
+    radial-gradient(var(--sprout-light) 0.8px, transparent 0.9px),
+    radial-gradient(ellipse 90% 34% at 50% -4%, var(--sun) 0%, transparent 46%),
+    radial-gradient(ellipse 70% 30% at 50% 2%, var(--sun-glow) 0%, transparent 60%),
+    linear-gradient(180deg, var(--sprout-light) 0%, var(--surface-bright) 20%, var(--background) 60%, #eef6df 100%);
+  background-size: 26px 26px, auto, auto, auto;
+  background-attachment: fixed;
+  color: var(--on-surface);
+  font-family: 'Gowun Dodum', system-ui, sans-serif;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+a { color: var(--primary); text-decoration: none; }
+h1, h2, h3, h4 { font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400; }
+
+/* ── Header (랜딩 header.brand 계승 + 최소 네비 신설) ── */
+header.brand {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 20px 24px; max-width: 900px; margin: 0 auto;
+}
+header.brand .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+header.brand .dot {
+  width: 44px; height: 44px; border-radius: 9999px; overflow: hidden;
+  background: var(--surface-card); box-shadow: var(--shadow-clay);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+header.brand .dot img { width: 100%; height: 100%; object-fit: cover; }
+header.brand .name {
+  font-family: 'Fredoka', 'Jua', sans-serif; font-weight: 600;
+  font-size: 1.4rem; color: var(--leaf-deep); letter-spacing: -0.01em;
+}
+header.brand nav { display: flex; gap: 18px; align-items: center; font-size: 0.95rem; }
+header.brand nav a { color: var(--on-surface-variant); font-family: 'Gowun Dodum', sans-serif; transition: color 0.2s; }
+header.brand nav a:hover { color: var(--primary); }
+header.brand nav a.active { color: var(--primary); font-family: 'Jua', sans-serif; }
+
+/* ── Breadcrumb ── */
+.breadcrumb { max-width: 800px; margin: 0 auto; padding: 0.5rem 24px 0; font-size: 0.85rem; color: var(--on-surface-variant); }
+.breadcrumb a { color: var(--primary); }
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* ── 목록 페이지: Hero ── */
+.blog-hero { text-align: center; padding: clamp(1.5rem, 1rem + 3vw, 3rem) 24px 1.5rem; max-width: 720px; margin: 0 auto; }
+.blog-hero h1 {
+  font-size: clamp(1.9rem, 1rem + 5vw, 2.8rem); line-height: 1.25;
+  letter-spacing: -0.02em; margin: 0 0 0.8rem; color: var(--leaf-deep);
+}
+.blog-hero h1 em { font-style: normal; color: var(--primary); position: relative; white-space: nowrap; }
+.blog-hero h1 em::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -0.08em; height: 0.28em;
+  background: var(--sun); border-radius: 9999px; z-index: -1; opacity: 0.55;
+}
+.blog-hero p { font-size: clamp(1.02rem, 0.95rem + 0.5vw, 1.2rem); color: var(--on-surface-variant); margin: 0 auto; max-width: 44ch; }
+
+/* ── 목록 인트로 ── */
+.blog-intro { max-width: 800px; margin: 0 auto; padding: 0 24px 1.5rem; }
+.blog-intro p { color: var(--on-surface-variant); margin: 0 0 1rem; }
+.blog-intro h2 {
+  font-size: 1.25rem; color: var(--leaf-deep); margin: 2rem 0 1rem;
+  border-left: 5px solid var(--sprout); padding-left: 0.8rem;
+}
+
+/* ── 카드 그리드 ── */
+.blog-grid {
+  max-width: 900px; margin: 0 auto; padding: 0 24px 1rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.4rem;
+}
+.blog-card {
+  background: var(--surface-card); border-radius: var(--radius-lg);
+  padding: 1.6rem; box-shadow: var(--shadow-clay); border: 2px solid #fff;
+  display: flex; flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+}
+.blog-card:hover { transform: translateY(-5px); box-shadow: 0 18px 34px -12px rgba(55,129,28,0.28), inset 2px 2px 4px rgba(255,255,255,0.9); }
+.blog-card .cat {
+  align-self: flex-start; font-family: 'Jua', sans-serif; font-size: 0.72rem;
+  padding: 0.25rem 0.7rem; border-radius: 9999px; margin-bottom: 0.9rem;
+  background: var(--primary-container); color: var(--leaf-deep);
+}
+.blog-card .cat.mood { background: var(--tertiary-container); color: #7f5a2a; }
+.blog-card .cat.wellness { background: var(--secondary-container); color: #1f5c40; }
+.blog-card .cat.guide { background: var(--sun-glow); color: var(--sun-deep); }
+.blog-card .emoji { font-size: 2rem; margin-bottom: 0.6rem; line-height: 1; }
+.blog-card h2 { font-size: 1.1rem; color: var(--leaf-deep); margin: 0 0 0.6rem; line-height: 1.4; }
+.blog-card p { color: var(--on-surface-variant); font-size: 0.92rem; flex: 1; margin: 0 0 1rem; line-height: 1.7; }
+.blog-card .meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.83rem; }
+.blog-card .date { color: var(--outline); }
+.blog-card .more { color: var(--primary); font-family: 'Jua', sans-serif; }
+
+/* ── 글 본문 ── */
+.article { max-width: 760px; margin: 0 auto; padding: 0.5rem 24px 2rem; }
+.article-header { margin: 1rem 0 2rem; }
+.article-header .cat {
+  display: inline-block; font-family: 'Jua', sans-serif; font-size: 0.75rem;
+  padding: 0.28rem 0.8rem; border-radius: 9999px; margin-bottom: 1rem;
+  background: var(--primary-container); color: var(--leaf-deep);
+}
+.article-header .cat.mood { background: var(--tertiary-container); color: #7f5a2a; }
+.article-header .cat.wellness { background: var(--secondary-container); color: #1f5c40; }
+.article-header .cat.guide { background: var(--sun-glow); color: var(--sun-deep); }
+.article-header h1 { font-size: clamp(1.7rem, 1rem + 4vw, 2.4rem); color: var(--leaf-deep); line-height: 1.3; margin: 0 0 0.8rem; }
+.article-header .ammeta { font-size: 0.88rem; color: var(--on-surface-variant); }
+.article h2 {
+  font-size: 1.4rem; color: var(--leaf-deep); margin: 2.6rem 0 1rem;
+  border-left: 5px solid var(--sprout); padding-left: 0.8rem;
+}
+.article h3 { font-size: 1.15rem; color: var(--leaf); margin: 1.8rem 0 0.7rem; }
+.article p { margin: 0 0 1.15rem; font-size: 1.06rem; }
+.article ul, .article ol { margin: 1rem 0 1.3rem 1.4rem; }
+.article li { margin-bottom: 0.5rem; }
+.article strong { color: var(--leaf-deep); }
+
+/* 강조 팁 박스 (클레이 카드) */
+.tip-box {
+  background: var(--surface-card); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-clay); border: 2px solid #fff;
+  padding: 1.4rem 1.6rem; margin: 1.8rem 0;
+}
+.tip-box .tip-label { font-family: 'Jua', sans-serif; color: var(--primary); display: block; margin-bottom: 0.4rem; }
+
+/* ★ 후기 인용 말풍선 (앱 .bubble-tail 감성 재현) — 후기 혼합 콘셉트의 시각적 핵심 */
+.review-quote {
+  position: relative; background: var(--surface-card); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-clay); border: 2px solid #fff;
+  padding: 1.5rem 1.7rem 1.6rem; margin: 2rem 0 2.6rem;
+}
+.review-quote::after {
+  content: ''; position: absolute; bottom: -14px; left: 40px;
+  border-width: 14px 14px 0; border-style: solid;
+  border-color: var(--surface-card) transparent transparent;
+  filter: drop-shadow(0 5px 4px rgba(55,129,28,0.06));
+}
+.review-quote .who { display: flex; align-items: center; gap: 10px; margin-bottom: 0.7rem; }
+.review-quote .who .ava {
+  width: 40px; height: 40px; border-radius: 9999px; display: grid; place-items: center;
+  background: var(--primary-container); font-size: 1.3rem; flex-shrink: 0;
+}
+.review-quote .who .nm { font-family: 'Jua', sans-serif; color: var(--leaf-deep); font-size: 0.98rem; }
+.review-quote .who .nm small { display: block; font-family: 'Gowun Dodum', sans-serif; color: var(--on-surface-variant); font-size: 0.78rem; }
+.review-quote p { margin: 0; color: var(--on-surface); font-size: 1.04rem; }
+.review-quote .stars { color: var(--sun-deep); letter-spacing: 2px; margin-bottom: 0.6rem; font-size: 0.95rem; }
+
+/* CTA 박스 */
+.cta-box {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--leaf) 100%);
+  color: #fff; border-radius: var(--radius-lg);
+  padding: 2rem 1.8rem; text-align: center; margin: 2.8rem 0;
+  box-shadow: 0 14px 30px -12px rgba(55,129,28,0.5);
+}
+.cta-box h3 { color: #fff; font-size: 1.3rem; margin: 0 0 0.6rem; }
+.cta-box p { color: rgba(255,255,255,0.92); margin: 0 0 1.3rem; }
+.cta-box .store-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-box .store-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.7rem 1.3rem; border-radius: 9999px; background: rgba(0,0,0,0.28);
+  color: #fff; opacity: 0.95;
+}
+.cta-box .store-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+.cta-box .store-btn .st { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+.cta-box .store-btn .st small { font-size: 0.66rem; opacity: 0.85; }
+.cta-box .store-btn .st b { font-family: 'Jua', sans-serif; font-size: 1rem; font-weight: 400; }
+
+/* 관련 글 */
+.related { margin-top: 3rem; padding-top: 1.8rem; border-top: 1px solid var(--outline); }
+.related h3 { font-size: 1.15rem; color: var(--leaf-deep); margin: 0 0 1rem; }
+.related-links { display: flex; flex-direction: column; gap: 0.6rem; }
+.related-links a { color: var(--primary); font-size: 0.98rem; }
+.related-links a:hover { text-decoration: underline; }
+
+/* CTA 섹션 (목록 하단) */
+.cta-section {
+  max-width: 900px; margin: 2rem auto 0; padding: 2.6rem 24px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--leaf) 100%);
+  color: #fff; text-align: center; border-radius: var(--radius-lg);
+}
+.cta-section h2 { color: #fff; font-size: 1.5rem; margin: 0 0 0.6rem; }
+.cta-section p { color: rgba(255,255,255,0.92); margin: 0 0 1.4rem; }
+.cta-section .btn-cta {
+  display: inline-block; background: #fff; color: var(--primary);
+  padding: 0.8rem 2rem; border-radius: 9999px; font-family: 'Jua', sans-serif;
+  transition: transform 0.2s;
+}
+.cta-section .btn-cta:hover { transform: translateY(-2px); }
+
+/* ── Footer (랜딩과 동일 구조) ── */
+footer {
+  border-top: 1px solid var(--outline); margin-top: var(--space-section);
+  padding: 2.5rem 24px 3rem; text-align: center; color: var(--on-surface-variant); font-size: 0.9rem;
+}
+footer .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
+footer a { color: var(--primary); }
+footer .links a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+footer .biz { font-size: 0.8rem; opacity: 0.85; line-height: 1.7; }
+
+@media (max-width: 768px) {
+  header.brand { padding: 16px 20px; }
+  header.brand nav { gap: 14px; font-size: 0.9rem; }
+  .blog-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body { background-attachment: scroll; }
+  .blog-card { transition: none; }
+}
