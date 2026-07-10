@@ -78,10 +78,19 @@ header.brand .name {
   font-family: 'Fredoka', 'Jua', sans-serif; font-weight: 600;
   font-size: 1.4rem; color: var(--leaf-deep); letter-spacing: -0.01em;
 }
-header.brand nav { display: flex; gap: 18px; align-items: center; font-size: 0.95rem; }
-header.brand nav a { color: var(--on-surface-variant); font-family: 'Gowun Dodum', sans-serif; transition: color 0.2s; }
-header.brand nav a:hover { color: var(--primary); }
-header.brand nav a.active { color: var(--primary); font-family: 'Jua', sans-serif; }
+header.brand nav { display: flex; gap: 10px; align-items: center; font-size: 0.95rem; }
+/* nav 링크는 pill 형태로 — "클릭 가능한 링크"임을 배경/hover로 드러낸다. */
+header.brand nav a {
+  color: var(--on-surface-variant); font-family: 'Gowun Dodum', sans-serif;
+  padding: 0.4rem 0.95rem; border-radius: 9999px;
+  transition: color 0.2s, background 0.2s;
+}
+header.brand nav a:hover { color: var(--primary); background: var(--primary-container); }
+/* 현재 페이지(.active)는 새싹 pill + Jua 볼드로 위치를 명확히 표시. */
+header.brand nav a.active {
+  color: var(--leaf-deep); font-family: 'Jua', sans-serif;
+  background: var(--primary-container); box-shadow: var(--shadow-clay-btn);
+}
 
 /* ── Breadcrumb ── */
 .breadcrumb { max-width: 800px; margin: 0 auto; padding: 0.5rem 24px 0; font-size: 0.85rem; color: var(--on-surface-variant); }

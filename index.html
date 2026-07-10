@@ -168,9 +168,15 @@
   /* ── Header ── */
   header.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 24px; max-width: 960px; margin: 0 auto; }
   header.brand .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  header.brand .nav { display: flex; gap: 18px; align-items: center; }
-  header.brand .nav a { font-family: 'Gowun Dodum', sans-serif; font-size: 0.98rem; color: var(--on-surface-variant); text-decoration: none; transition: color 0.2s; }
-  header.brand .nav a:hover { color: var(--primary); }
+  header.brand .nav { display: flex; gap: 10px; align-items: center; }
+  /* "블로그" 링크를 새싹 pill로 — 클릭 가능한 링크임을 배경으로 드러낸다. */
+  header.brand .nav a {
+    font-family: 'Jua', sans-serif; font-size: 0.98rem; color: var(--leaf-deep);
+    text-decoration: none; padding: 0.42rem 1.05rem; border-radius: 9999px;
+    background: var(--primary-container); box-shadow: var(--shadow-clay-btn);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  header.brand .nav a:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(55,129,28,0.4), inset 1px 1px 3px rgba(255,255,255,0.5); }
   header.brand .dot {
     width: 46px; height: 46px; border-radius: 9999px; overflow: hidden;
     background: var(--surface-card); box-shadow: var(--shadow-clay);
