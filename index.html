@@ -482,8 +482,9 @@
     },
     {
       "@type": "SoftwareApplication",
+      "@id": "https://my-today.net/#app-ios",
       "name": "myToday",
-      "operatingSystem": "iOS, Android",
+      "operatingSystem": "iOS",
       "applicationCategory": "LifestyleApplication",
       "description": "매일의 기분을 5단계로 기록하고, 하고 싶은 일을 등록·달성하며 새싹처럼 성장하는 마음 습관 다이어리. 기분 추이, 할 일 달성 통계, 성장 정원, 친구 공유를 제공합니다.",
       "inLanguage": "ko-KR",
@@ -491,12 +492,32 @@
       "image": "https://my-today.net/assets/banner.png",
       "author": { "@id": "https://my-today.net/#org" },
       "downloadUrl": "https://apps.apple.com/kr/app/id6785864596",
-      "installUrl": "https://apps.apple.com/kr/app/id6785864596",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "KRW",
         "url": "https://apps.apple.com/kr/app/id6785864596",
+        "availability": "https://schema.org/InStock",
+        "description": "무료 다운로드. 광고 제거 프리미엄 구독(월 3,300원 / 연 29,000원, 스토어 기준)."
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://my-today.net/#app-android",
+      "name": "myToday",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "description": "매일의 기분을 5단계로 기록하고, 하고 싶은 일을 등록·달성하며 새싹처럼 성장하는 마음 습관 다이어리. 기분 추이, 할 일 달성 통계, 성장 정원, 친구 공유를 제공합니다.",
+      "inLanguage": "ko-KR",
+      "url": "https://my-today.net/",
+      "image": "https://my-today.net/assets/banner.png",
+      "author": { "@id": "https://my-today.net/#org" },
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.joyfulday.mytoday",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW",
+        "url": "https://play.google.com/store/apps/details?id=com.joyfulday.mytoday",
         "availability": "https://schema.org/InStock",
         "description": "무료 다운로드. 광고 제거 프리미엄 구독(월 3,300원 / 연 29,000원, 스토어 기준)."
       }
@@ -593,7 +614,7 @@
           <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 3c.1 1-.3 2-1 2.8-.7.8-1.7 1.3-2.7 1.2-.1-1 .4-2 1-2.7.7-.8 1.8-1.3 2.7-1.3zM19 17c-.4 1-.6 1.4-1.1 2.3-.7 1.2-1.7 2.7-2.9 2.7-1.1 0-1.4-.7-2.9-.7s-1.8.7-2.9.7c-1.2 0-2.1-1.3-2.8-2.5C2.6 17.7 2.4 13.9 4 12c.9-1.1 2-1.6 3-1.6 1.1 0 1.8.7 2.9.7 1 0 1.6-.7 2.9-.7.9 0 1.9.4 2.7 1.2-2.4 1.3-2 4.7.6 5.4z"/></svg>
           <span class="st"><small>App Store</small><b>준비 중</b></span>
         </span>
-        <span class="store-btn" role="button" aria-label="Google Play 준비 중">
+        <span class="store-btn" data-playstore role="button" aria-label="Google Play 준비 중">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3 13 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#00d4ff"/><path d="M17 8.2 13 12l-9.4-9.7c.3-.2.7-.2 1 0L17 8.2z" fill="#00f076"/><path d="M17 15.8 4.6 21.7c-.3.2-.7.2-1 0L13 12l4 3.8z" fill="#ff3a44"/><path d="m17 8.2 3.9 2.3c.7.4.7 1.6 0 2l-3.9 2.3L13 12l4-3.8z" fill="#ffc900"/></svg>
           <span class="st"><small>Google Play</small><b>준비 중</b></span>
         </span>
@@ -810,7 +831,7 @@
           <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 3c.1 1-.3 2-1 2.8-.7.8-1.7 1.3-2.7 1.2-.1-1 .4-2 1-2.7.7-.8 1.8-1.3 2.7-1.3zM19 17c-.4 1-.6 1.4-1.1 2.3-.7 1.2-1.7 2.7-2.9 2.7-1.1 0-1.4-.7-2.9-.7s-1.8.7-2.9.7c-1.2 0-2.1-1.3-2.8-2.5C2.6 17.7 2.4 13.9 4 12c.9-1.1 2-1.6 3-1.6 1.1 0 1.8.7 2.9.7 1 0 1.6-.7 2.9-.7.9 0 1.9.4 2.7 1.2-2.4 1.3-2 4.7.6 5.4z"/></svg>
           <span class="st"><small>App Store</small><b>준비 중</b></span>
         </span>
-        <span class="store-btn" role="button" aria-label="Google Play 준비 중">
+        <span class="store-btn" data-playstore role="button" aria-label="Google Play 준비 중">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3 13 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#00d4ff"/><path d="M17 8.2 13 12l-9.4-9.7c.3-.2.7-.2 1 0L17 8.2z" fill="#00f076"/><path d="M17 15.8 4.6 21.7c-.3.2-.7.2-1 0L13 12l4 3.8z" fill="#ff3a44"/><path d="m17 8.2 3.9 2.3c.7.4.7 1.6 0 2l-3.9 2.3L13 12l4-3.8z" fill="#ffc900"/></svg>
           <span class="st"><small>Google Play</small><b>준비 중</b></span>
         </span>
@@ -861,50 +882,70 @@
   </script>
 
   <script>
-    // ── App Store 출시 자동 감지 → 다운로드 링크 활성화 ────────────────────────
-    //   iTunes Lookup API(JSONP)로 앱이 App Store 에 "실제 노출"됐는지 확인한다.
-    //   노출된 경우에만 "준비 중" span 을 실제 다운로드 <a> 링크로 전환한다(죽은 링크 방지).
-    //   미노출/네트워크 실패 시엔 "준비 중" 상태를 그대로 유지한다(안전 폴백).
-    //   ※ Android(Google Play)는 비공개 테스트 중이라 건드리지 않는다 — App Store 만 활성화.
-    //   ※ itunes.apple.com 은 CORS 헤더가 없어 fetch 불가 → 공식 지원되는 JSONP(&callback=)로 호출.
+    // ── 스토어 출시 상태 → 다운로드 링크 활성화 ──────────────────────────────────
+    //   App Store: iTunes Lookup(JSONP)로 "실제 노출"을 실시간 감지해, 노출된 경우에만
+    //              "준비 중" span 을 실제 다운로드 <a> 로 전환한다(죽은 링크 방지).
+    //              ※ itunes.apple.com 은 CORS 헤더가 없어 fetch 불가 → 공식 JSONP(&callback=)로 호출.
+    //   Google Play: play.google.com 은 CORS/JSONP 를 모두 막아 브라우저 실시간 감지가
+    //                원천 불가능하다. 정식 출시(게시 완료)가 확정된 상태이므로, 감지 대신
+    //                게시 확정 링크를 라이브로 켠다. 안전 패턴(is-live·innerHTML 미사용 DOM
+    //                이동)은 App Store 와 동일하게 적용한다.
+    //   두 플랫폼 상태는 독립적으로 추적해 배지 문구를 정확히 반영한다.
     (function () {
-      var APPLE_ID = '6785864596';
-      var STORE_URL = 'https://apps.apple.com/kr/app/id' + APPLE_ID;
-      var CB = '__mytodayItunesCb';
-      var done = false;
+      var storeLive = { ios: false, android: false };
 
-      function activate() {
-        if (done) return;
-        done = true;
-
-        // 1) App Store 버튼(2군데)을 실제 링크로 전환.
-        var btns = document.querySelectorAll('[data-appstore]');
-        btns.forEach(function (span) {
+      // 지정한 마킹 속성의 버튼(여러 곳)을 실제 다운로드 <a> 링크로 전환한다.
+      //   ★innerHTML 미사용(XSS 표면 원천 차단): 기존 자식 노드(SVG+텍스트)를 그대로 이동.
+      function linkify(selector, url, ariaLabel) {
+        document.querySelectorAll(selector).forEach(function (span) {
+          if (span.tagName === 'A') return; // 이미 전환됨(중복 호출 방지)
           var a = document.createElement('a');
           a.className = span.className + ' is-live';
-          a.href = STORE_URL;
+          a.href = url;
           a.target = '_blank';
-          a.rel = 'noopener';
-          a.setAttribute('aria-label', 'App Store에서 myToday 다운로드');
-          // ★innerHTML 미사용(XSS 표면 원천 차단): 기존 자식 노드(SVG+텍스트)를 그대로 이동.
-          //   내용은 우리 정적 마크업이지만, 습관적으로 안전한 DOM 이동 방식을 쓴다.
+          a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', ariaLabel);
           while (span.firstChild) { a.appendChild(span.firstChild); }
-          // "준비 중" → "다운로드"
           var b = a.querySelector('.st b');
           if (b) b.textContent = '다운로드';
           span.parentNode.replaceChild(a, span);
         });
+      }
 
-        // 2) 배지 문구 갱신(App Store 만 출시, Google Play 는 준비 중 유지).
+      // 두 플랫폼 상태에 맞춰 배지 문구를 갱신한다.
+      function refreshBadge() {
+        var text;
+        if (storeLive.ios && storeLive.android) text = '🌱 App Store · Google Play 출시!';
+        else if (storeLive.ios) text = '🌱 App Store 출시! · Google Play 준비 중';
+        else if (storeLive.android) text = '🌱 Google Play 출시! · App Store 준비 중';
+        else text = '🌱 App Store · Google Play 준비 중';
         document.querySelectorAll('[data-store-badge]').forEach(function (badge) {
-          badge.textContent = '🌱 App Store 출시! · Google Play 준비 중';
+          badge.textContent = text;
         });
+      }
+
+      // ── Google Play: 게시 확정 → 즉시 활성화 ──────────────────────────────
+      var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.joyfulday.mytoday';
+      linkify('[data-playstore]', PLAY_URL, 'Google Play에서 myToday 다운로드');
+      storeLive.android = true;
+      refreshBadge();
+
+      // ── App Store: iTunes Lookup(JSONP)로 실시간 감지 ─────────────────────
+      var APPLE_ID = '6785864596';
+      var STORE_URL = 'https://apps.apple.com/kr/app/id' + APPLE_ID;
+      var CB = '__mytodayItunesCb';
+
+      function activateIos() {
+        if (storeLive.ios) return;
+        linkify('[data-appstore]', STORE_URL, 'App Store에서 myToday 다운로드');
+        storeLive.ios = true;
+        refreshBadge();
       }
 
       // JSONP 콜백: resultCount>=1 이면 실제 노출됨.
       window[CB] = function (data) {
         try {
-          if (data && data.resultCount >= 1) activate();
+          if (data && data.resultCount >= 1) activateIos();
         } catch (e) { /* 무해 — 준비 중 유지 */ }
         cleanup();
       };
