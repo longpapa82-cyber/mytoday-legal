@@ -62,35 +62,7 @@ body {
 a { color: var(--primary); text-decoration: none; }
 h1, h2, h3, h4 { font-family: 'Jua', 'Gowun Dodum', sans-serif; font-weight: 400; }
 
-/* ── Header (랜딩 header.brand 계승 + 최소 네비 신설) ── */
-header.brand {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; padding: 20px 24px; max-width: 900px; margin: 0 auto;
-}
-header.brand .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-header.brand .dot {
-  width: 44px; height: 44px; border-radius: 9999px; overflow: hidden;
-  background: var(--surface-card); box-shadow: var(--shadow-clay);
-  display: grid; place-items: center; flex-shrink: 0;
-}
-header.brand .dot img { width: 100%; height: 100%; object-fit: cover; }
-header.brand .name {
-  font-family: 'Fredoka', 'Jua', sans-serif; font-weight: 600;
-  font-size: 1.4rem; color: var(--leaf-deep); letter-spacing: -0.01em;
-}
-header.brand nav { display: flex; gap: 10px; align-items: center; font-size: 0.95rem; }
-/* nav 링크는 pill 형태로 — "클릭 가능한 링크"임을 배경/hover로 드러낸다. */
-header.brand nav a {
-  color: var(--on-surface-variant); font-family: 'Gowun Dodum', sans-serif;
-  padding: 0.4rem 0.95rem; border-radius: 9999px;
-  transition: color 0.2s, background 0.2s;
-}
-header.brand nav a:hover { color: var(--primary); background: var(--primary-container); }
-/* 현재 페이지(.active)는 새싹 pill + Jua 볼드로 위치를 명확히 표시. */
-header.brand nav a.active {
-  color: var(--leaf-deep); font-family: 'Jua', sans-serif;
-  background: var(--primary-container); box-shadow: var(--shadow-clay-btn);
-}
+/* ── Header (GNB) 는 공통 /gnb.css 로 일원화됨 — 여기서 정의하지 않는다. ── */
 
 /* ── Breadcrumb ── */
 .breadcrumb { max-width: 800px; margin: 0 auto; padding: 0.5rem 24px 0; font-size: 0.85rem; color: var(--on-surface-variant); }
@@ -263,8 +235,7 @@ footer .links a { font-weight: 700; text-decoration: underline; text-underline-o
 footer .biz { font-size: 0.8rem; opacity: 0.85; line-height: 1.7; }
 
 @media (max-width: 768px) {
-  header.brand { padding: 16px 20px; }
-  header.brand nav { gap: 14px; font-size: 0.9rem; }
+  /* header.brand 반응형은 공통 /gnb.css 로 이관됨. */
   .blog-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {

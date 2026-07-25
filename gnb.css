@@ -1,0 +1,106 @@
+/* ============================================================
+   myToday 홍보웹 공통 GNB (Global Navigation Bar)
+   단일 진실 공급원(SSOT) — 구조는 gnb.js, 스타일은 이 파일.
+   gnb.js 가 #site-gnb 슬롯에 <header class="brand"> 를 주입한다.
+
+   ★ 이 파일은 각 페이지의 CSS 변수에 의존하지 않도록
+     자체 fallback 변수를 :root 에 선언한다(변수 누락 페이지 방어).
+     페이지가 같은 이름의 변수를 이미 정의했다면 그 값이 우선한다.
+   ============================================================ */
+:root {
+  --gnb-leaf-deep: #2d5016;
+  --gnb-primary: #37811c;
+  --gnb-primary-container: #caf59a;
+  --gnb-surface-card: #fbfdf3;
+  --gnb-on-surface-variant: #454a3b;
+  --gnb-shadow-clay:
+    0 10px 30px -12px rgba(55, 129, 28, 0.28),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.9);
+  --gnb-shadow-clay-btn:
+    0 6px 16px -6px rgba(55, 129, 28, 0.32),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.6);
+}
+
+/* 슬롯 자체는 레이아웃에 영향 주지 않음 */
+#site-gnb { display: block; }
+
+header.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header.brand .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+header.brand .dot {
+  width: 46px;
+  height: 46px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: var(--gnb-surface-card);
+  box-shadow: var(--gnb-shadow-clay);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+header.brand .dot img { width: 100%; height: 100%; object-fit: cover; }
+
+header.brand .name {
+  font-family: 'Fredoka', 'Jua', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--gnb-leaf-deep);
+  letter-spacing: -0.01em;
+}
+
+header.brand .nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* nav 링크는 pill 형태로 — "클릭 가능한 링크"임을 배경/hover로 드러낸다. */
+header.brand .nav a {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 0.98rem;
+  color: var(--gnb-on-surface-variant);
+  text-decoration: none;
+  padding: 0.42rem 1.05rem;
+  border-radius: 9999px;
+  transition: color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+header.brand .nav a:hover {
+  color: var(--gnb-primary);
+  background: var(--gnb-primary-container);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px -8px rgba(55, 129, 28, 0.4), inset 1px 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* 현재 페이지(.active)는 새싹 pill + Jua 볼드로 위치를 명확히 표시. */
+header.brand .nav a.active {
+  font-family: 'Jua', sans-serif;
+  color: var(--gnb-leaf-deep);
+  background: var(--gnb-primary-container);
+  box-shadow: var(--gnb-shadow-clay-btn);
+}
+
+@media (max-width: 640px) {
+  header.brand { padding: 16px 20px; }
+  header.brand .name { font-size: 1.35rem; }
+  header.brand .nav { gap: 8px; font-size: 0.9rem; }
+  header.brand .nav a { padding: 0.4rem 0.9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header.brand .nav a { transition: none; }
+  header.brand .nav a:hover { transform: none; }
+}

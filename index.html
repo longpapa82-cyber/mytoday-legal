@@ -36,6 +36,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- 앱과 동일한 3종 폰트: Jua(제목)·Gowun Dodum(본문)·Fredoka(브랜드 로고). 셋 다 단일 weight. -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Fredoka:wght@600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/gnb.css" />
 <style>
   :root {
     /* ── 앱 v2 "새싹 정원" 색 토큰 (src/constants/colors.ts) ── */
@@ -163,29 +164,6 @@
   @media (prefers-reduced-motion: reduce) {
     .leaf { animation: none; transform: scale(var(--s, 1)); }
     body { background-attachment: scroll; }
-  }
-
-  /* ── Header ── */
-  header.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 24px; max-width: 960px; margin: 0 auto; }
-  header.brand .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  header.brand .nav { display: flex; gap: 10px; align-items: center; }
-  /* "블로그" 링크를 새싹 pill로 — 클릭 가능한 링크임을 배경으로 드러낸다. */
-  header.brand .nav a {
-    font-family: 'Jua', sans-serif; font-size: 0.98rem; color: var(--leaf-deep);
-    text-decoration: none; padding: 0.42rem 1.05rem; border-radius: 9999px;
-    background: var(--primary-container); box-shadow: var(--shadow-clay-btn);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  header.brand .nav a:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(55,129,28,0.4), inset 1px 1px 3px rgba(255,255,255,0.5); }
-  header.brand .dot {
-    width: 46px; height: 46px; border-radius: 9999px; overflow: hidden;
-    background: var(--surface-card); box-shadow: var(--shadow-clay);
-    display: grid; place-items: center;
-  }
-  header.brand .dot img { width: 100%; height: 100%; object-fit: cover; }
-  header.brand .name {
-    font-family: 'Fredoka', 'Jua', sans-serif; font-weight: 600;
-    font-size: 1.5rem; color: var(--leaf-deep); letter-spacing: -0.01em;
   }
 
   /* ── Hero ── */
@@ -567,15 +545,7 @@
     <span class="dew d1"></span><span class="dew d2"></span><span class="dew d3"></span><span class="dew d4"></span>
   </div>
 
-  <header class="brand">
-    <a class="logo" href="./index.html" aria-label="myToday 홈">
-      <span class="dot"><img src="./assets/mascot.png" alt="" /></span>
-      <span class="name">myToday</span>
-    </a>
-    <nav class="nav">
-      <a href="./blog/">블로그</a>
-    </nav>
-  </header>
+  <div id="site-gnb"></div>
 
   <main>
     <!-- Hero -->
@@ -1001,5 +971,6 @@
       document.head.appendChild(script);
     })();
   </script>
+  <script src="/gnb.js" defer></script>
 </body>
 </html>
