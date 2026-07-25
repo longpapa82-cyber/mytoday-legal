@@ -11,3 +11,4 @@ User-agent: Googlebot
 Allow: /
 
 Sitemap: https://my-today.net/sitemap.xml
+Sitemap: https://my-today.net/blog/rss.xml
