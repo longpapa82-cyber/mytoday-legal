@@ -2,14 +2,18 @@
 /**
  * 블로그 동기화 스크립트 — posts.json(SSOT) → index.html·sitemap.xml 자동 갱신
  *
- * 사용법: legal-site/blog/ 에서 `node sync.mjs`
+ * 사용법: legal-site/blog/ 에서 `node sync.mjs` (파일만 생성)
+ *         `node sync.mjs --ping` (생성 + IndexNow 색인 알림 전송)
  * 하는 일:
  *   1) blog/index.html 카드 그리드 재생성 (HTML 주석 마커 BLOG-CARDS 사이)
  *   2) blog/index.html JSON-LD Blog 블록 전체 재생성 (<script type="application/ld+json"> 통째 교체 — JSON 내부엔 주석 불가하므로)
  *   3) ../sitemap.xml 블로그 URL 구간 재생성 (XML 주석 마커 BLOG-URLS 사이)
+ *   4) blog/rss.xml 재생성
+ *   5) (--ping 시) IndexNow로 사이트 전체 URL 색인 알림 (네이버·Bing·Yandex)
  * 정렬: published 내림차순(최신 먼저). draft:true 항목은 목록·사이트맵에서 제외.
  *
- * 새 글 추가 절차: (1) blog/<slug>.html 작성 (2) posts.json 항목 추가 (3) node sync.mjs
+ * 새 글 추가 절차: (1) blog/<slug>.html 작성 (2) posts.json 항목 추가
+ *   (3) node sync.mjs (4) 커밋·푸시 후 배포 확인 (5) node sync.mjs --ping
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -18,6 +22,14 @@ import { dirname, join } from 'node:path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = __dirname;
 const SITE = 'https://my-today.net';
+
+// IndexNow 색인 즉시 알림(네이버 서치어드바이저·Bing·Yandex 지원). `--ping` 플래그 실행 시에만 전송.
+// 키 파일은 사이트 루트(../{KEY}.txt)에 존재해야 소유권이 인정된다 — 파일명·내용 모두 이 값.
+const INDEXNOW_KEY = '747eac71135ab9b19eae3be311d6790d';
+const INDEXNOW_ENDPOINTS = [
+  'https://searchadvisor.naver.com/indexnow',
+  'https://api.indexnow.org/indexnow',
+];
 
 // 스토어 URL 중앙화(SSOT) — 글 cta·랜딩·RSS에서 참조. 링크 변경 시 여기 한 곳만 수정.
 export const STORE = {
@@ -37,7 +49,35 @@ function replaceBetween(src, name, inner) {
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const fmtDot = (iso) => iso.replace(/-/g, '.');
 
-function main() {
+/**
+ * IndexNow로 URL 목록 색인 알림. 실패해도 파일 생성엔 영향 없도록 non-fatal(경고만).
+ * 한 번의 POST에 사이트 전체 URL을 담아 보낸다(엔드포인트별 1회).
+ */
+async function pingIndexNow(urlList) {
+  const host = new URL(SITE).host;
+  const body = JSON.stringify({
+    host,
+    key: INDEXNOW_KEY,
+    keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
+    urlList,
+  });
+  for (const endpoint of INDEXNOW_ENDPOINTS) {
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body,
+      });
+      // 200·202 정상. 그 외는 경고만 남기고 다음 엔드포인트로.
+      const ok = res.status === 200 || res.status === 202;
+      console.log(`   ${ok ? '✅' : '⚠️'} IndexNow ${endpoint} → ${res.status}`);
+    } catch (err) {
+      console.log(`   ⚠️ IndexNow ${endpoint} → 전송 실패: ${err.message}`);
+    }
+  }
+}
+
+async function main() {
   const data = JSON.parse(readFileSync(join(BLOG_DIR, 'posts.json'), 'utf8'));
   const lastmod = data.lastmod || new Date().toISOString().slice(0, 10);
   const posts = data.posts
@@ -133,6 +173,21 @@ ${items}
 
   console.log(`✅ 동기화 완료: ${posts.length}편 (index.html 카드+JSON-LD, sitemap.xml, rss.xml)`);
   posts.forEach((p, i) => console.log(`   ${i + 1}. [${p.catLabel}] ${p.slug} (${p.published})`));
+
+  // ── 5) IndexNow 색인 알림 (--ping 플래그 있을 때만) ──
+  // sitemap과 동일한 전체 URL 집합(정적 페이지 + 블로그)을 한 번에 전송.
+  if (process.argv.includes('--ping')) {
+    const staticUrls = [
+      `${SITE}/`,
+      `${SITE}/privacy.html`,
+      `${SITE}/terms.html`,
+      `${SITE}/delete-account.html`,
+      `${SITE}/blog/`,
+    ];
+    const urlList = [...staticUrls, ...posts.map((p) => `${SITE}/blog/${p.slug}.html`)];
+    console.log(`📡 IndexNow 전송: ${urlList.length}개 URL`);
+    await pingIndexNow(urlList);
+  }
 }
 
 main();
